@@ -3,27 +3,47 @@ import csv
 import json
 import sqlite3
 import subprocess
-import sys
+import time
 import wave
 from pathlib import Path
+from urllib.parse import quote
 
 from piper import PiperVoice, SynthesisConfig
 
 ROOT = Path(__file__).resolve().parent
 OUT = ROOT / "out"
 VOICES_DIR = ROOT / "voices"
+BASE_URL = "https://huggingface.co/rhasspy/piper-voices/resolve/main"
+
+
+def download(name):
+    locale, speaker, quality = name.split("-")
+    folder = f"{locale.split('_')[0]}/{locale}/{speaker}/{quality}"
+    for ext in (".onnx.json", ".onnx"):
+        target = VOICES_DIR / f"{name}{ext}"
+        if target.exists():
+            continue
+        url = f"{BASE_URL}/{quote(folder)}/{quote(name)}{ext}"
+        part = target.with_name(target.name + ".part")
+        attempt = 0
+        while True:
+            code = subprocess.run(
+                ["curl", "-L", "--fail", "-sS", "-C", "-", "-o", str(part), url]
+            ).returncode
+            if code in (0, 33):
+                break
+            if code == 22:
+                raise RuntimeError(f"voice tidak ditemukan: {url}")
+            attempt += 1
+            print(f"  {name}: koneksi terputus, mengulang ({attempt})")
+            time.sleep(3)
+        part.replace(target)
 
 
 def load_voice(name):
-    model = VOICES_DIR / f"{name}.onnx"
-    if not model.exists():
-        VOICES_DIR.mkdir(exist_ok=True)
-        subprocess.run(
-            [sys.executable, "-m", "piper.download_voices", name],
-            cwd=VOICES_DIR,
-            check=True,
-        )
-    return PiperVoice.load(str(model))
+    VOICES_DIR.mkdir(exist_ok=True)
+    download(name)
+    return PiperVoice.load(str(VOICES_DIR / f"{name}.onnx"))
 
 
 def build_db(rows, langs):
