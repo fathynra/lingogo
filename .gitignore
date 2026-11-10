@@ -1,1 +1,7 @@
+<<<<<<< HEAD
 /voices
+=======
+voices/
+.venv/
+__pycache__/
+>>>>>>> 9ed43498902d724f4c8c0b79e883f0f5222ba5f6
