@@ -1,0 +1,31 @@
+key,category,id,en,es,fr,de,it,pt,ru,zh,tr
+greet_hello,greeting,Halo,Hello,Hola,Bonjour,Hallo,Ciao,Olá,Здравствуйте,你好,Merhaba
+greet_morning,greeting,Selamat pagi,Good morning,Buenos días,Bonne matinée,Guten Morgen,Buongiorno,Bom dia,Доброе утро,早上好,Günaydın
+greet_goodbye,greeting,Sampai jumpa,Goodbye,Adiós,Au revoir,Auf Wiedersehen,Arrivederci,Tchau,До свидания,再见,Hoşça kalın
+intro_name,intro,Nama saya,My name is,Me llamo,Je m'appelle,Ich heiße,Mi chiamo,Meu nome é,Меня зовут,我叫,Benim adım
+polite_sorry,polite,Maaf,I'm sorry,Lo siento,Je suis désolé,Es tut mir leid,Mi dispiace,Desculpe,Простите,对不起,Özür dilerim
+polite_excuse,polite,Permisi,Excuse me,Disculpe,Excusez-moi,Entschuldigen Sie,Mi scusi,Com licença,Прошу прощения,打扰一下,Affedersiniz
+polite_thanks,polite,Terima kasih,Thank you,Gracias,Merci,Danke,Grazie,Obrigado,Спасибо,谢谢,Teşekkür ederim
+polite_welcome,polite,Sama-sama,You're welcome,De nada,De rien,Gern geschehen,Prego,De nada,Пожалуйста,不客气,Rica ederim
+polite_please,polite,Tolong,Please,Por favor,S'il vous plaît,Bitte,Per favore,Por favor,Пожалуйста,请,Lütfen
+basic_yes,basic,Ya,Yes,Sí,Oui,Ja,Sì,Sim,Да,是的,Evet
+basic_no,basic,Tidak,No,No,Non,Nein,No,Não,Нет,不是,Hayır
+shop_how_much,shopping,Berapa harga ini?,How much is this?,¿Cuánto cuesta esto?,Combien ça coûte ?,Wie viel kostet das?,Quanto costa questo?,Quanto custa isto?,Сколько это стоит?,这个多少钱？,Bu ne kadar?
+shop_buy_this,shopping,Saya mau beli ini,I want to buy this,Quiero comprar esto,Je voudrais acheter ceci,Ich möchte das kaufen,Vorrei comprare questo,Eu quero comprar isto,Я хочу купить это,我想买这个,Bunu satın almak istiyorum
+shop_too_expensive,shopping,Terlalu mahal,That's too expensive,Es demasiado caro,C'est trop cher,Das ist zu teuer,È troppo caro,Está muito caro,Это слишком дорого,太贵了,Bu çok pahalı
+shop_discount,shopping,Bisa kurang?,Can you give me a discount?,¿Me puede hacer un descuento?,Pouvez-vous me faire une réduction ?,Können Sie mir einen Rabatt geben?,Può farmi uno sconto?,Pode fazer um desconto?,Можно скидку?,能便宜一点吗？,İndirim yapabilir misiniz?
+shop_card,shopping,Bisa bayar pakai kartu?,Can I pay by card?,¿Puedo pagar con tarjeta?,Puis-je payer par carte ?,Kann ich mit Karte bezahlen?,Posso pagare con la carta?,Posso pagar com cartão?,Можно оплатить картой?,可以刷卡吗？,Kartla ödeyebilir miyim?
+help_toilet,help,Di mana toilet?,Where is the toilet?,¿Dónde está el baño?,Où sont les toilettes ?,Wo ist die Toilette?,Dov'è il bagno?,Onde fica o banheiro?,Где туалет?,厕所在哪里？,Tuvalet nerede?
+help_help_me,help,Bisa tolong saya?,Can you help me?,¿Me puede ayudar?,Pouvez-vous m'aider ?,Können Sie mir helfen?,Può aiutarmi?,Pode me ajudar?,Вы можете мне помочь?,你能帮我吗？,Bana yardım edebilir misiniz?
+help_dont_understand,help,Saya tidak mengerti,I don't understand,No entiendo,Je ne comprends pas,Ich verstehe nicht,Non capisco,Eu não entendo,Я не понимаю,我不明白,Anlamıyorum
+help_speak_english,help,Apakah Anda bisa berbahasa Inggris?,Do you speak English?,¿Habla inglés?,Parlez-vous anglais ?,Sprechen Sie Englisch?,Parla inglese?,Você fala inglês?,Вы говорите по-английски?,你会说英语吗？,İngilizce biliyor musunuz?
+num_1,number,Satu,One,Uno,Un,Eins,Uno,Um,Один,一,Bir
+num_2,number,Dua,Two,Dos,Deux,Zwei,Due,Dois,Два,二,İki
+num_3,number,Tiga,Three,Tres,Trois,Drei,Tre,Três,Три,三,Üç
+num_4,number,Empat,Four,Cuatro,Quatre,Vier,Quattro,Quatro,Четыре,四,Dört
+num_5,number,Lima,Five,Cinco,Cinq,Fünf,Cinque,Cinco,Пять,五,Beş
+num_6,number,Enam,Six,Seis,Six,Sechs,Sei,Seis,Шесть,六,Altı
+num_7,number,Tujuh,Seven,Siete,Sept,Sieben,Sette,Sete,Семь,七,Yedi
+num_8,number,Delapan,Eight,Ocho,Huit,Acht,Otto,Oito,Восемь,八,Sekiz
+num_9,number,Sembilan,Nine,Nueve,Neuf,Neun,Nove,Nove,Девять,九,Dokuz
+num_10,number,Sepuluh,Ten,Diez,Dix,Zehn,Dieci,Dez,Десять,十,On

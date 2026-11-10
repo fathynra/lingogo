@@ -1,0 +1,25 @@
+{
+  "piper": {
+    "en": "en_US-lessac-medium",
+    "es": "es_ES-davefx-medium",
+    "fr": "fr_FR-siwis-medium",
+    "de": "de_DE-thorsten-medium",
+    "it": "it_IT-paola-medium",
+    "pt": "pt_BR-faber-medium",
+    "ru": "ru_RU-denis-medium",
+    "zh": "zh_CN-huayan-medium",
+    "tr": "tr_TR-dfki-medium"
+  },
+  "edge": {
+    "id": "id-ID-GadisNeural",
+    "en": "en-US-AriaNeural",
+    "es": "es-ES-ElviraNeural",
+    "fr": "fr-FR-DeniseNeural",
+    "de": "de-DE-KatjaNeural",
+    "it": "it-IT-ElsaNeural",
+    "pt": "pt-BR-FranciscaNeural",
+    "ru": "ru-RU-SvetlanaNeural",
+    "zh": "zh-CN-XiaoxiaoNeural",
+    "tr": "tr-TR-EmelNeural"
+  }
+}
