@@ -1,0 +1,46 @@
+### REST Client (VS Code). Ubah baseUrl / kunci sesuai kebutuhan.
+@baseUrl = https://lingogo.stei.site/api
+# uji lokal: @baseUrl = http://localhost:8080/api
+@apiKey = ISI_API_KEY
+@email = demo@lingogo.stei.site
+@password = ISI_PASSWORD_DEMO
+
+### 1. Health
+GET {{baseUrl}}/health
+
+### 2. Login -> salin token ke variabel di bawah
+# @name login
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{ "email": "{{email}}", "password": "{{password}}" }
+
+###
+@token = {{login.response.body.token}}
+
+### 3. Preferensi pengguna
+PATCH {{baseUrl}}/users/me/preferences
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "ui_language": "id", "pron_style": "id", "target_language": "de_DE" }
+
+### 4. Bahasa (X-API-Key, untuk kelompok lain)
+GET {{baseUrl}}/languages?ui=id
+X-API-Key: {{apiKey}}
+
+### 5. Bahasa di destinasi
+GET {{baseUrl}}/destinations/CH/languages?ui=id
+Authorization: Bearer {{token}}
+
+### 5b. Nomor darurat destinasi
+GET {{baseUrl}}/destinations/DE/emergency-numbers?ui=id
+Authorization: Bearer {{token}}
+
+### 6. Frasa salam: UI Indonesia, pelafalan untuk pembicara Indonesia
+GET {{baseUrl}}/phrases?lang=de_DE&from=id&pron=id&category=greeting
+Authorization: Bearer {{token}}
+
+### 7. Satu frasa: UI Inggris, pelafalan pembicara Inggris
+GET {{baseUrl}}/phrases/shop_how_much?lang=ja_JP&from=en&pron=en
+X-API-Key: {{apiKey}}

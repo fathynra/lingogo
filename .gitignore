@@ -1,8 +1,10 @@
-<<<<<<< HEAD
-/voices
-=======
-voices/
-.venv/
+.env
+*.db
+*.db-wal
+*.db-shm
 __pycache__/
-out/phrases.db
->>>>>>> 9ed43498902d724f4c8c0b79e883f0f5222ba5f6
+.pytest_cache/
+.venv/
+backup-*/
+out/
+*.part

@@ -1,0 +1,2 @@
+PyYAML>=6
+# untuk menjalankan export_docs.py, pasang juga: pip install -r phrase-service/requirements.txt -r user-service/requirements.txt

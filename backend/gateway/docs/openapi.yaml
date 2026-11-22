@@ -1,0 +1,1087 @@
+openapi: 3.1.0
+info:
+  title: LingoGo API
+  version: 1.0.0
+  description: 'API LingoGo (Tourism Language Assistance) — frasa, terjemahan, pelafalan & audio.
+
+
+    **Autentikasi**
+
+    - Pengguna aplikasi: `Authorization: Bearer <JWT>` dari `POST /auth/login`.
+
+    - Kelompok lain (server ke server): header `X-API-Key` (minta ke kelompok lingogo).
+
+    - Dibatasi rate limit per IP (HTTP 429 jika berlebihan).'
+servers:
+- url: https://lingogo.stei.site/api
+tags:
+- name: system
+- name: auth
+- name: users
+- name: destination-language
+- name: phrasebook
+- name: pronunciation
+- name: admin
+paths:
+  /audio/{lang}/{key}.mp3:
+    get:
+      tags:
+      - pronunciation
+      summary: File audio pengucapan (MP3, statis, tanpa auth)
+      description: Gunakan `target.audio_url` dari respons frasa; path ini untuk referensi.
+      security: []
+      parameters:
+      - name: lang
+        in: path
+        required: true
+        schema:
+          type: string
+        example: de_DE
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: string
+        example: greet_hello
+      responses:
+        '200':
+          description: audio/mpeg
+          content:
+            audio/mpeg:
+              schema:
+                type: string
+                format: binary
+        '404':
+          description: Audio belum tersedia
+  /auth/login:
+    post:
+      tags:
+      - auth
+      summary: Masuk, dapat JWT
+      operationId: login_auth_login_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginIn'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenOut'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /auth/logout:
+    post:
+      tags:
+      - auth
+      summary: Keluar (token dicabut)
+      operationId: logout_auth_logout_post
+      responses:
+        '204':
+          description: Successful Response
+      security:
+      - HTTPBearer: []
+  /auth/me:
+    get:
+      tags:
+      - auth
+      summary: Data akun + preferensi
+      operationId: me_auth_me_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserOut'
+      security:
+      - HTTPBearer: []
+  /auth/register:
+    post:
+      tags:
+      - auth
+      summary: Daftar akun baru
+      operationId: register_auth_register_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterIn'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserOut'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /categories:
+    get:
+      tags:
+      - phrasebook
+      summary: Daftar kategori frasa
+      operationId: list_categories_categories_get
+      security:
+      - APIKeyHeader: []
+      - HTTPBearer: []
+      parameters:
+      - name: ui
+        in: query
+        required: false
+        schema:
+          enum:
+          - en
+          - id
+          type: string
+          default: en
+          title: Ui
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Category'
+                title: Response List Categories Categories Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /destinations:
+    get:
+      tags:
+      - destination-language
+      summary: Daftar destinasi + kode bahasanya
+      operationId: list_destinations_destinations_get
+      security:
+      - APIKeyHeader: []
+      - HTTPBearer: []
+      parameters:
+      - name: ui
+        in: query
+        required: false
+        schema:
+          enum:
+          - en
+          - id
+          type: string
+          default: en
+          title: Ui
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Destination'
+                title: Response List Destinations Destinations Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /destinations/{code}/emergency-numbers:
+    get:
+      tags:
+      - destination-language
+      summary: Nomor darurat satu destinasi
+      operationId: destination_emergency_destinations__code__emergency_numbers_get
+      security:
+      - APIKeyHeader: []
+      - HTTPBearer: []
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Code
+      - name: ui
+        in: query
+        required: false
+        schema:
+          enum:
+          - en
+          - id
+          type: string
+          default: en
+          title: Ui
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DestinationEmergency'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /destinations/{code}/languages:
+    get:
+      tags:
+      - destination-language
+      summary: Bahasa yang dipakai di suatu destinasi
+      operationId: destination_languages_destinations__code__languages_get
+      security:
+      - APIKeyHeader: []
+      - HTTPBearer: []
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Code
+      - name: ui
+        in: query
+        required: false
+        schema:
+          enum:
+          - en
+          - id
+          type: string
+          default: en
+          title: Ui
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Language'
+                title: Response Destination Languages Destinations  Code  Languages Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /emergency-numbers:
+    get:
+      tags:
+      - destination-language
+      summary: Nomor darurat (polisi, damkar, ambulans) semua destinasi
+      operationId: list_emergency_emergency_numbers_get
+      security:
+      - APIKeyHeader: []
+      - HTTPBearer: []
+      parameters:
+      - name: ui
+        in: query
+        required: false
+        schema:
+          enum:
+          - en
+          - id
+          type: string
+          default: en
+          title: Ui
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DestinationEmergency'
+                title: Response List Emergency Emergency Numbers Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /health:
+    get:
+      tags:
+      - system
+      summary: Cek gateway hidup (tanpa auth)
+      security: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              example:
+                gateway: ok
+  /health/phrase-service:
+    get:
+      tags:
+      - system
+      summary: Cek phrase-service (tanpa auth)
+      security: []
+      responses:
+        '200':
+          description: OK
+        '502':
+          description: Service mati
+  /health/user-service:
+    get:
+      tags:
+      - system
+      summary: Cek user-service (tanpa auth)
+      security: []
+      responses:
+        '200':
+          description: OK
+        '502':
+          description: Service mati
+  /languages:
+    get:
+      tags:
+      - destination-language
+      summary: Daftar bahasa
+      operationId: list_languages_languages_get
+      security:
+      - APIKeyHeader: []
+      - HTTPBearer: []
+      parameters:
+      - name: ui
+        in: query
+        required: false
+        schema:
+          enum:
+          - en
+          - id
+          type: string
+          default: en
+          title: Ui
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Language'
+                title: Response List Languages Languages Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /languages/{code}:
+    get:
+      tags:
+      - destination-language
+      summary: Detail satu bahasa
+      operationId: get_language_languages__code__get
+      security:
+      - APIKeyHeader: []
+      - HTTPBearer: []
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Code
+      - name: ui
+        in: query
+        required: false
+        schema:
+          enum:
+          - en
+          - id
+          type: string
+          default: en
+          title: Ui
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Language'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /phrases:
+    get:
+      tags:
+      - phrasebook
+      summary: Daftar frasa dalam bahasa tujuan
+      operationId: list_phrases_phrases_get
+      security:
+      - APIKeyHeader: []
+      - HTTPBearer: []
+      parameters:
+      - name: lang
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Kode bahasa tujuan, mis. ja_JP / fr_FR
+          title: Lang
+        description: Kode bahasa tujuan, mis. ja_JP / fr_FR
+      - name: from
+        in: query
+        required: false
+        schema:
+          type: string
+          description: 'Bahasa antarmuka: en | id'
+          default: en
+          title: From
+        description: 'Bahasa antarmuka: en | id'
+      - name: pron
+        in: query
+        required: false
+        schema:
+          enum:
+          - en
+          - id
+          type: string
+          description: Panduan pelafalan untuk pembicara en | id
+          default: en
+          title: Pron
+        description: Panduan pelafalan untuk pembicara en | id
+      - name: category
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Filter kode kategori, mis. greeting
+          title: Category
+        description: Filter kode kategori, mis. greeting
+      - name: q
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            minLength: 1
+            maxLength: 50
+          - type: 'null'
+          description: Cari di teks sumber/tujuan
+          title: Q
+        description: Cari di teks sumber/tujuan
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 100
+          minimum: 1
+          default: 50
+          title: Limit
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+          title: Offset
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PhraseList'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /phrases/{key}:
+    get:
+      tags:
+      - phrasebook
+      summary: Satu frasa dalam bahasa tujuan
+      operationId: get_phrase_phrases__key__get
+      security:
+      - APIKeyHeader: []
+      - HTTPBearer: []
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Key
+      - name: lang
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Kode bahasa tujuan
+          title: Lang
+        description: Kode bahasa tujuan
+      - name: from
+        in: query
+        required: false
+        schema:
+          type: string
+          default: en
+          title: From
+      - name: pron
+        in: query
+        required: false
+        schema:
+          enum:
+          - en
+          - id
+          type: string
+          default: en
+          title: Pron
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PhraseOut'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /phrases/{key}/translations/{lang}:
+    put:
+      tags:
+      - admin
+      summary: '[Admin] Ubah teks / pelafalan sebuah terjemahan'
+      operationId: update_translation_phrases__key__translations__lang__put
+      security:
+      - APIKeyHeader: []
+      - HTTPBearer: []
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Key
+      - name: lang
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Lang
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TranslationUpdate'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PhraseOut'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /users/me/preferences:
+    get:
+      tags:
+      - users
+      summary: Lihat preferensi
+      operationId: get_prefs_users_me_preferences_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Preferences'
+      security:
+      - HTTPBearer: []
+    patch:
+      tags:
+      - users
+      summary: Ubah preferensi (bahasa UI, gaya pelafalan, bahasa tujuan, destinasi)
+      operationId: update_prefs_users_me_preferences_patch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PreferencesUpdate'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Preferences'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+components:
+  schemas:
+    Category:
+      properties:
+        code:
+          type: string
+          title: Code
+        name:
+          type: string
+          title: Name
+        phrase_count:
+          type: integer
+          title: Phrase Count
+      type: object
+      required:
+      - code
+      - name
+      - phrase_count
+      title: Category
+    CategoryRef:
+      properties:
+        code:
+          type: string
+          title: Code
+        name:
+          type: string
+          title: Name
+      type: object
+      required:
+      - code
+      - name
+      title: CategoryRef
+    Destination:
+      properties:
+        code:
+          type: string
+          title: Code
+        name:
+          type: string
+          title: Name
+        languages:
+          items:
+            type: string
+          type: array
+          title: Languages
+      type: object
+      required:
+      - code
+      - name
+      - languages
+      title: Destination
+    DestinationEmergency:
+      properties:
+        destination:
+          type: string
+          title: Destination
+          examples:
+          - DE
+        name:
+          type: string
+          title: Name
+        available:
+          type: boolean
+          title: Available
+          description: False jika data nomor darurat negara ini belum ada
+        numbers:
+          $ref: '#/components/schemas/EmergencyNumbers'
+      type: object
+      required:
+      - destination
+      - name
+      - available
+      - numbers
+      title: DestinationEmergency
+    EmergencyNumbers:
+      properties:
+        police:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Police
+        fire:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Fire
+        ambulance:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Ambulance
+      type: object
+      title: EmergencyNumbers
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    Language:
+      properties:
+        code:
+          type: string
+          title: Code
+          examples:
+          - ja_JP
+        name:
+          type: string
+          title: Name
+        native_name:
+          type: string
+          title: Native Name
+        country_code:
+          type: string
+          title: Country Code
+        phrase_count:
+          type: integer
+          title: Phrase Count
+        audio_count:
+          type: integer
+          title: Audio Count
+      type: object
+      required:
+      - code
+      - name
+      - native_name
+      - country_code
+      - phrase_count
+      - audio_count
+      title: Language
+    PhraseList:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/PhraseOut'
+          type: array
+          title: Items
+        total:
+          type: integer
+          title: Total
+        limit:
+          type: integer
+          title: Limit
+        offset:
+          type: integer
+          title: Offset
+      type: object
+      required:
+      - items
+      - total
+      - limit
+      - offset
+      title: PhraseList
+    PhraseOut:
+      properties:
+        key:
+          type: string
+          title: Key
+        category:
+          $ref: '#/components/schemas/CategoryRef'
+        source:
+          $ref: '#/components/schemas/SourceText'
+        target:
+          $ref: '#/components/schemas/TargetText'
+      type: object
+      required:
+      - key
+      - category
+      - source
+      - target
+      title: PhraseOut
+    Pronunciation:
+      properties:
+        style:
+          type: string
+          title: Style
+          description: '''en'' = dibaca pembicara Inggris, ''id'' = pembicara Indonesia'
+        guide:
+          type: string
+          title: Guide
+      type: object
+      required:
+      - style
+      - guide
+      title: Pronunciation
+    SourceText:
+      properties:
+        lang:
+          type: string
+          title: Lang
+        text:
+          type: string
+          title: Text
+      type: object
+      required:
+      - lang
+      - text
+      title: SourceText
+    TargetText:
+      properties:
+        lang:
+          type: string
+          title: Lang
+        text:
+          type: string
+          title: Text
+        pronunciation:
+          $ref: '#/components/schemas/Pronunciation'
+        audio_url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Audio Url
+      type: object
+      required:
+      - lang
+      - text
+      - pronunciation
+      - audio_url
+      title: TargetText
+    TranslationUpdate:
+      properties:
+        text:
+          anyOf:
+          - type: string
+            maxLength: 300
+            minLength: 1
+          - type: 'null'
+          title: Text
+        pronunciation_en:
+          anyOf:
+          - type: string
+            maxLength: 300
+            minLength: 1
+          - type: 'null'
+          title: Pronunciation En
+        pronunciation_id:
+          anyOf:
+          - type: string
+            maxLength: 300
+            minLength: 1
+          - type: 'null'
+          title: Pronunciation Id
+      type: object
+      title: TranslationUpdate
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    LoginIn:
+      properties:
+        email:
+          type: string
+          title: Email
+        password:
+          type: string
+          title: Password
+      type: object
+      required:
+      - email
+      - password
+      title: LoginIn
+    Preferences:
+      properties:
+        ui_language:
+          type: string
+          enum:
+          - en
+          - id
+          title: Ui Language
+          default: en
+        pron_style:
+          type: string
+          enum:
+          - en
+          - id
+          title: Pron Style
+          description: Panduan pelafalan untuk pembicara en | id
+          default: en
+        target_language:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Target Language
+          examples:
+          - ja_JP
+        default_destination:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Default Destination
+          examples:
+          - JP
+      type: object
+      title: Preferences
+    PreferencesUpdate:
+      properties:
+        ui_language:
+          anyOf:
+          - type: string
+            enum:
+            - en
+            - id
+          - type: 'null'
+          title: Ui Language
+        pron_style:
+          anyOf:
+          - type: string
+            enum:
+            - en
+            - id
+          - type: 'null'
+          title: Pron Style
+        target_language:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Target Language
+          description: Kosongkan string '' untuk menghapus
+        default_destination:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Default Destination
+          description: Kosongkan string '' untuk menghapus
+      type: object
+      title: PreferencesUpdate
+    RegisterIn:
+      properties:
+        name:
+          type: string
+          maxLength: 100
+          minLength: 1
+          title: Name
+        email:
+          type: string
+          maxLength: 150
+          title: Email
+          examples:
+          - bita@example.com
+        password:
+          type: string
+          maxLength: 72
+          minLength: 8
+          title: Password
+      type: object
+      required:
+      - name
+      - email
+      - password
+      title: RegisterIn
+    TokenOut:
+      properties:
+        token:
+          type: string
+          title: Token
+        token_type:
+          type: string
+          title: Token Type
+          default: Bearer
+        expires_in:
+          type: integer
+          title: Expires In
+        user:
+          $ref: '#/components/schemas/UserOut'
+      type: object
+      required:
+      - token
+      - expires_in
+      - user
+      title: TokenOut
+    UserOut:
+      properties:
+        id:
+          type: integer
+          title: Id
+        name:
+          type: string
+          title: Name
+        email:
+          type: string
+          title: Email
+        role:
+          type: string
+          title: Role
+        preferences:
+          $ref: '#/components/schemas/Preferences'
+      type: object
+      required:
+      - id
+      - name
+      - email
+      - role
+      - preferences
+      title: UserOut
+  securitySchemes:
+    APIKeyHeader:
+      type: apiKey
+      description: Untuk kelompok lain (server ke server)
+      in: header
+      name: X-API-Key
+    HTTPBearer:
+      type: http
+      description: JWT dari POST /auth/login
+      scheme: bearer

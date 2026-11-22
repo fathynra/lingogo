@@ -1,0 +1,43 @@
+code,name_en,name_id,languages
+JO,Jordan,Yordania,ar_JO
+ES,Spain,Spanyol,es_ES;ca_ES
+CZ,Czech Republic,Ceko,cs_CZ
+GB,United Kingdom,Inggris Raya,en_GB;cy_GB
+DK,Denmark,Denmark,da_DK
+DE,Germany,Jerman,de_DE
+GR,Greece,Yunani,el_GR
+US,United States,Amerika Serikat,en_US
+AR,Argentina,Argentina,es_AR
+MX,Mexico,Meksiko,es_MX
+IR,Iran,Iran,fa_IR
+FI,Finland,Finlandia,fi_FI
+FR,France,Prancis,fr_FR
+HU,Hungary,Hungaria,hu_HU
+IS,Iceland,Islandia,is_IS
+ID,Indonesia,Indonesia,id_ID;en_US
+IT,Italy,Italia,it_IT
+GE,Georgia,Georgia,ka_GE
+KZ,Kazakhstan,Kazakhstan,kk_KZ
+LU,Luxembourg,Luksemburg,lb_LU;fr_FR;de_DE
+LV,Latvia,Latvia,lv_LV
+IN,India,India,hi_IN;ml_IN;te_IN
+NP,Nepal,Nepal,ne_NP
+BE,Belgium,Belgia,nl_BE;fr_FR
+NL,Netherlands,Belanda,nl_NL
+NO,Norway,Norwegia,no_NO
+PL,Poland,Polandia,pl_PL
+BR,Brazil,Brasil,pt_BR
+PT,Portugal,Portugal,pt_PT
+RO,Romania,Rumania,ro_RO
+RU,Russia,Rusia,ru_RU
+SK,Slovakia,Slovakia,sk_SK
+SI,Slovenia,Slovenia,sl_SI
+RS,Serbia,Serbia,sr_RS
+SE,Sweden,Swedia,sv_SE
+CD,DR Congo,Kongo (RD),sw_CD
+TR,Turkey,Turki,tr_TR
+UA,Ukraine,Ukraina,uk_UA
+VN,Vietnam,Vietnam,vi_VN
+CN,China,Tiongkok,zh_CN
+CH,Switzerland,Swiss,de_DE;fr_FR;it_IT
+AT,Austria,Austria,de_DE

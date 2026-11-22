@@ -1,0 +1,75 @@
+# LingoGo backend. Letaknya bersaudara dengan tts/ di repo yang sama:
+#   lingogo/
+#     tts/       <- data frasa, pelafalan, nomor darurat, audio (sudah ada, TIDAK diubah)
+#     backend/   <- file ini
+#
+#   docker compose up -d --build                    # lokal (tanpa tunnel)
+#   docker compose --profile tunnel up -d --build   # di STB (dengan Cloudflare Tunnel)
+name: lingogo
+
+x-common: &common
+  restart: unless-stopped
+  logging:
+    driver: json-file
+    options: { max-size: "5m", max-file: "3" }
+
+services:
+  phrase-service:
+    <<: *common
+    build: ./phrase-service
+    environment:
+      JWT_SECRET: ${JWT_SECRET:?isi JWT_SECRET di .env}
+      API_KEYS: ${API_KEYS:-}
+      PUBLIC_BASE_URL: ${PUBLIC_BASE_URL:-}
+      DB_PATH: /data/phrases.db
+      TTS_DIR: /tts
+      AUDIO_DIR: /audio
+    volumes:
+      - phrase_data:/data
+      - ../tts:/tts:ro                              # sumber data (read-only)
+      - ${AUDIO_HOST_DIR:-../tts/out/audio}:/audio:ro
+    mem_limit: 160m
+    cpus: 0.5          # aturan STB: batasi memori & CPU
+
+  user-service:
+    <<: *common
+    build: ./user-service
+    environment:
+      JWT_SECRET: ${JWT_SECRET:?isi JWT_SECRET di .env}
+      JWT_EXPIRE_MINUTES: ${JWT_EXPIRE_MINUTES:-10080}
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-}
+      DEMO_EMAIL: ${DEMO_EMAIL:-}
+      DEMO_PASSWORD: ${DEMO_PASSWORD:-}
+      DB_PATH: /data/users.db
+    volumes:
+      - user_data:/data
+    mem_limit: 128m
+    cpus: 0.5
+
+  gateway:
+    <<: *common
+    image: nginx:1.28-alpine
+    depends_on: [phrase-service, user-service]
+    ports:
+      - "${GATEWAY_PORT:-8080}:80"   # uji di jaringan lokal; akses publik lewat tunnel
+    volumes:
+      - ./gateway/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./gateway/proxy_params.conf:/etc/nginx/proxy_params.conf:ro
+      - ./gateway/docs:/usr/share/nginx/docs:ro
+      - ${AUDIO_HOST_DIR:-../tts/out/audio}:/usr/share/audio:ro
+    mem_limit: 64m
+    cpus: 0.25
+
+  tunnel:
+    <<: *common
+    image: cloudflare/cloudflared:latest
+    command: tunnel --no-autoupdate run --token ${TUNNEL_TOKEN:-}
+    depends_on: [gateway]
+    profiles: ["tunnel"]
+    mem_limit: 96m
+    cpus: 0.25
+
+volumes:
+  phrase_data:
+  user_data:

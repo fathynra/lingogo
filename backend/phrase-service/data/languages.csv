@@ -1,0 +1,45 @@
+code,name_en,name_id,native_name,country_code
+ar_JO,Arabic (Jordan),Arab (Yordania),العربية,JO
+ca_ES,Catalan,Katalan,Català,ES
+cs_CZ,Czech,Ceko,Čeština,CZ
+cy_GB,Welsh,Wales,Cymraeg,GB
+da_DK,Danish,Denmark,Dansk,DK
+de_DE,German,Jerman,Deutsch,DE
+el_GR,Greek,Yunani,Ελληνικά,GR
+en_GB,English (UK),Inggris (Britania),English,GB
+en_US,English (US),Inggris (Amerika),English,US
+es_AR,Spanish (Argentina),Spanyol (Argentina),Español,AR
+es_ES,Spanish (Spain),Spanyol (Spanyol),Español,ES
+es_MX,Spanish (Mexico),Spanyol (Meksiko),Español,MX
+fa_IR,Persian,Persia,فارسی,IR
+fi_FI,Finnish,Finlandia,Suomi,FI
+fr_FR,French,Prancis,Français,FR
+hu_HU,Hungarian,Hungaria,Magyar,HU
+is_IS,Icelandic,Islandia,Íslenska,IS
+id_ID,Indonesian,Indonesia,Bahasa Indonesia,ID
+it_IT,Italian,Italia,Italiano,IT
+ka_GE,Georgian,Georgia,ქართული,GE
+kk_KZ,Kazakh,Kazakh,Қазақша,KZ
+lb_LU,Luxembourgish,Luksemburg,Lëtzebuergesch,LU
+lv_LV,Latvian,Latvia,Latviešu,LV
+ml_IN,Malayalam,Malayalam,മലയാളം,IN
+hi_IN,Hindi,Hindi,हिन्दी,IN
+ne_NP,Nepali,Nepal,नेपाली,NP
+nl_BE,Dutch (Belgium),Belanda (Belgia),Nederlands,BE
+nl_NL,Dutch (Netherlands),Belanda (Belanda),Nederlands,NL
+no_NO,Norwegian,Norwegia,Norsk,NO
+pl_PL,Polish,Polandia,Polski,PL
+pt_BR,Portuguese (Brazil),Portugis (Brasil),Português,BR
+pt_PT,Portuguese (Portugal),Portugis (Portugal),Português,PT
+ro_RO,Romanian,Rumania,Română,RO
+ru_RU,Russian,Rusia,Русский,RU
+sk_SK,Slovak,Slovakia,Slovenčina,SK
+sl_SI,Slovenian,Slovenia,Slovenščina,SI
+sr_RS,Serbian,Serbia,Српски,RS
+sv_SE,Swedish,Swedia,Svenska,SE
+sw_CD,Swahili,Swahili,Kiswahili,CD
+te_IN,Telugu,Telugu,తెలుగు,IN
+tr_TR,Turkish,Turki,Türkçe,TR
+uk_UA,Ukrainian,Ukraina,Українська,UA
+vi_VN,Vietnamese,Vietnam,Tiếng Việt,VN
+zh_CN,Chinese (Mandarin),Mandarin,中文,CN
