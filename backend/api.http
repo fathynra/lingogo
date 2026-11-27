@@ -18,29 +18,41 @@ Content-Type: application/json
 ###
 @token = {{login.response.body.token}}
 
-### 3. Preferensi pengguna
+### 3. Preferensi pengguna (bahasa UI, gaya pelafalan, bahasa daerah & kota terakhir)
 PATCH {{baseUrl}}/users/me/preferences
 Authorization: Bearer {{token}}
 Content-Type: application/json
 
-{ "ui_language": "id", "pron_style": "id", "target_language": "de_DE" }
+{ "ui_language": "id", "pron_style": "id", "target_language": "jv_ID", "default_city": "3578" }
 
-### 4. Bahasa (X-API-Key, untuk kelompok lain)
-GET {{baseUrl}}/languages?ui=id
+### 4. Daftar provinsi + bahasa daerahnya (X-API-Key, untuk kelompok lain)
+GET {{baseUrl}}/provinces?ui=id
 X-API-Key: {{apiKey}}
 
-### 5. Bahasa di destinasi
-GET {{baseUrl}}/destinations/CH/languages?ui=id
+### 5. Cari kota (hasil: Surabaya -> bahasa Jawa)
+GET {{baseUrl}}/cities?q=surabaya&ui=id
 Authorization: Bearer {{token}}
 
-### 5b. Nomor darurat destinasi
-GET {{baseUrl}}/destinations/DE/emergency-numbers?ui=id
+### 5b. Kota tidak ada -> 404 {"detail":"Maaf, kota yang Anda cari tidak ada di database."}
+GET {{baseUrl}}/cities?q=atlantis&ui=id
 Authorization: Bearer {{token}}
 
-### 6. Frasa salam: UI Indonesia, pelafalan untuk pembicara Indonesia
-GET {{baseUrl}}/phrases?lang=de_DE&from=id&pron=id&category=greeting
+### 5c. Hanya kota / hanya kabupaten
+GET {{baseUrl}}/cities?q=Kab. Malang&ui=id
 Authorization: Bearer {{token}}
 
-### 7. Satu frasa: UI Inggris, pelafalan pembicara Inggris
-GET {{baseUrl}}/phrases/shop_how_much?lang=ja_JP&from=en&pron=en
+### 6. Alur utama: kota -> kategori + kartu frasa (arti & pelafalan Indonesia)
+GET {{baseUrl}}/cities/3578/phrasebook?ui=id&pron=id
+Authorization: Bearer {{token}}
+
+### 6b. Kota berbahasa ganda: pilih bahasa lain
+GET {{baseUrl}}/cities/3274/phrasebook?lang=su_ID&ui=en&pron=en
+Authorization: Bearer {{token}}
+
+### 7. Satu frasa: arti Inggris, pelafalan Inggris
+GET {{baseUrl}}/phrases/shop_how_much?lang=ban_ID&ui=en
+X-API-Key: {{apiKey}}
+
+### 8. Nomor darurat nasional
+GET {{baseUrl}}/emergency-numbers?ui=id
 X-API-Key: {{apiKey}}

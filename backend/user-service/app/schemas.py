@@ -4,7 +4,7 @@ from typing import Literal
 from pydantic import BaseModel, Field, field_validator
 
 EMAIL_RE = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
-LANG_RE = re.compile(r"^[a-z]{2}_[A-Z]{2}$")
+LANG_RE = re.compile(r"^[a-z]{2,3}_[A-Z]{2}$")
 
 
 class RegisterIn(BaseModel):
@@ -34,29 +34,29 @@ class LoginIn(BaseModel):
 class Preferences(BaseModel):
     ui_language: Literal["en", "id"] = "en"
     pron_style: Literal["en", "id"] = Field("en", description="Panduan pelafalan untuk pembicara en | id")
-    target_language: str | None = Field(None, examples=["ja_JP"])
-    default_destination: str | None = Field(None, examples=["JP"])
+    target_language: str | None = Field(None, description="Bahasa daerah terakhir dipakai", examples=["jv_ID"])
+    default_city: str | None = Field(None, description="Kode kota favorit/terakhir (4 digit)", examples=["3578"])
 
 
 class PreferencesUpdate(BaseModel):
     ui_language: Literal["en", "id"] | None = None
     pron_style: Literal["en", "id"] | None = None
     target_language: str | None = Field(None, description="Kosongkan string '' untuk menghapus")
-    default_destination: str | None = Field(None, description="Kosongkan string '' untuk menghapus")
+    default_city: str | None = Field(None, description="Kosongkan string '' untuk menghapus")
 
     @field_validator("target_language")
     @classmethod
     def _lang(cls, v):
         if v and not LANG_RE.match(v):
-            raise ValueError("Format kode bahasa: xx_XX")
+            raise ValueError("Format kode bahasa: xx_XX atau xxx_XX (mis. jv_ID, ban_ID)")
         return v
 
-    @field_validator("default_destination")
+    @field_validator("default_city")
     @classmethod
-    def _dest(cls, v):
-        if v and not re.match(r"^[A-Za-z]{2}$", v):
-            raise ValueError("Kode destinasi 2 huruf")
-        return v.upper() if v else v
+    def _city(cls, v):
+        if v and not re.match(r"^\d{4}$", v):
+            raise ValueError("Kode kota 4 digit (mis. 3578)")
+        return v
 
 
 class UserOut(BaseModel):

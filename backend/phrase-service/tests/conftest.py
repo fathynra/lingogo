@@ -1,28 +1,46 @@
 import os
+import shutil
 import time
 from pathlib import Path
 
 import jwt
 import pytest
 
-# backend/phrase-service/tests -> repo root / tts  (bisa di-override dengan env TTS_DIR)
-TTS = Path(os.getenv("TTS_DIR", Path(__file__).resolve().parents[3] / "tts"))
-if not (TTS / "phrases.csv").is_file():
-    pytest.skip(f"folder tts tidak ditemukan di {TTS}", allow_module_level=True)
-
+HERE = Path(__file__).resolve().parent
+FIXTURE_DB = HERE / "fixtures" / "database"      # data kecil & tetap khusus tes
+REAL_DB = HERE.parents[2] / "database"           # lingogo/database (data sungguhan)
 SECRET = "test-secret-test-secret-test-secret"
+
+
+@pytest.fixture
+def fixture_copy(tmp_path):
+    """Salinan data tes yang boleh dirusak oleh tes."""
+    dst = tmp_path / "database"
+    shutil.copytree(FIXTURE_DB, dst)
+    return dst
+
+
+@pytest.fixture(scope="session")
+def con(tmp_path_factory):
+    """Koneksi SQLite yang sudah diisi dari data tes (untuk tes repository)."""
+    from app import db, seed
+    c = db.connect(tmp_path_factory.mktemp("repo") / "p.db")
+    seed.ensure_seeded(c, FIXTURE_DB)
+    yield c
+    c.close()
 
 
 @pytest.fixture(scope="session")
 def client(tmp_path_factory):
-    tmp = tmp_path_factory.mktemp("lingogo")
-    audio = tmp / "audio" / "de_DE"
-    audio.mkdir(parents=True)
-    (audio / "greet_hello.mp3").write_bytes(b"x")
-    (audio / "greet_hello.wav").write_bytes(b"x")   # mp3 harus diprioritaskan
-    os.environ.update(TTS_DIR=str(TTS), DB_PATH=str(tmp / "p.db"), AUDIO_DIR=str(tmp / "audio"),
-                      JWT_SECRET=SECRET, API_KEYS="kelompokx:key-x,kelompoky:key-y")
+    """Klien HTTP penuh. Dilewati otomatis bila fastapi/httpx belum terpasang."""
+    pytest.importorskip("fastapi")
+    pytest.importorskip("httpx")
+    tmp = tmp_path_factory.mktemp("api")
+    os.environ.update(DATABASE_DIR=str(FIXTURE_DB), DB_PATH=str(tmp / "p.db"), JWT_SECRET=SECRET,
+                      API_KEYS="kelompokx:key-x,kelompoky:key-y")
     from fastapi.testclient import TestClient
+    from app import config
+    config.JWT_SECRET, config.API_KEYS_RAW = SECRET, os.environ["API_KEYS"]
     from app.main import app
     with TestClient(app) as c:
         yield c

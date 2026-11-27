@@ -1,0 +1,5 @@
+code,name_id,name_en,native_name,closest_code,status
+jv_ID,Jawa,Javanese,Basa Jawa,jv_ID,native
+su_ID,Sunda,Sundanese,Basa Sunda,su_ID,native
+ban_ID,Bali,Balinese,Basa Bali,ban_ID,native
+osi_ID,Osing,Osing,Using,jv_ID,approximate

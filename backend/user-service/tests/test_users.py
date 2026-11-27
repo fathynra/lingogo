@@ -7,7 +7,7 @@ def test_register_validation(client):
     assert ok.status_code == 201 and ok.json()["email"] == "z@y.com"
     assert "password" not in ok.text
     assert ok.json()["preferences"] == {"ui_language": "en", "pron_style": "en",
-                                        "target_language": None, "default_destination": None}
+                                        "target_language": None, "default_city": None}
     dup = client.post("/auth/register", json={"name": "A", "email": "z@y.com", "password": "12345678"})
     assert dup.status_code == 409
     assert client.post("/auth/register", json={"name": "A", "email": "z@y.com", "password": "pendek"}).status_code == 422
@@ -34,18 +34,21 @@ def test_me_requires_token(client):
 def test_preferences(client):
     _, h = reg_login(client, "p@b.co")
     r = client.patch("/users/me/preferences", headers=h,
-                     json={"ui_language": "id", "pron_style": "id", "target_language": "ja_JP",
-                           "default_destination": "jp"})
+                     json={"ui_language": "id", "pron_style": "id", "target_language": "jv_ID",
+                           "default_city": "3578"})
     assert r.status_code == 200
-    assert r.json() == {"ui_language": "id", "pron_style": "id", "target_language": "ja_JP",
-                        "default_destination": "JP"}
+    assert r.json() == {"ui_language": "id", "pron_style": "id", "target_language": "jv_ID",
+                        "default_city": "3578"}
     assert client.get("/users/me/preferences", headers=h).json()["ui_language"] == "id"
     part = client.patch("/users/me/preferences", headers=h, json={"pron_style": "en"}).json()
-    assert part["pron_style"] == "en" and part["target_language"] == "ja_JP"
+    assert part["pron_style"] == "en" and part["target_language"] == "jv_ID"
     cleared = client.patch("/users/me/preferences", headers=h, json={"target_language": ""}).json()
     assert cleared["target_language"] is None
     assert client.patch("/users/me/preferences", headers=h, json={"ui_language": "fr"}).status_code == 422
-    assert client.patch("/users/me/preferences", headers=h, json={"target_language": "japan"}).status_code == 422
+    assert client.patch("/users/me/preferences", headers=h, json={"target_language": "jawa"}).status_code == 422
+    assert client.patch("/users/me/preferences", headers=h, json={"default_city": "surabaya"}).status_code == 422
+    ban = client.patch("/users/me/preferences", headers=h, json={"target_language": "ban_ID"})
+    assert ban.status_code == 200 and ban.json()["target_language"] == "ban_ID"   # kode 3 huruf sah
     assert client.patch("/users/me/preferences", headers=h, json={}).status_code == 422
     assert client.patch("/users/me/preferences", headers=h, json={"ui_language": None}).status_code == 422
     assert client.patch("/users/me/preferences", json={"ui_language": "en"}).status_code == 401

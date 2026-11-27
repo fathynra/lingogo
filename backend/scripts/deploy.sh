@@ -1,7 +1,7 @@
 #!/bin/sh
 # Jalankan di STB, dari folder backend/:  sh scripts/deploy.sh
 set -e
-git pull --ff-only          # menarik backend/ DAN tts/ (data & audio)
+git pull --ff-only          # menarik backend/ DAN database/ (CSV)
 docker compose --profile tunnel up -d --build
 docker compose ps
 sleep 5

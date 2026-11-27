@@ -15,7 +15,7 @@ from pathlib import Path
 import yaml
 
 ROOT = Path(__file__).resolve().parent.parent
-ENV = {**os.environ, "JWT_SECRET": "x" * 32, "DB_PATH": "/tmp/_export.db"}
+ENV = {**os.environ, "JWT_SECRET": "x" * 32, "DB_PATH": "/tmp/_export.db", "DATABASE_DIR": str(ROOT.parent / "database")}
 
 
 def spec_of(service: str) -> dict:
@@ -43,19 +43,6 @@ def main():
     paths["/health/user-service"] = {"get": {
         "tags": ["system"], "summary": "Cek user-service (tanpa auth)", "security": [],
         "responses": {"200": {"description": "OK"}, "502": {"description": "Service mati"}}}}
-    paths["/audio/{lang}/{file}"] = {"get": {
-        "tags": ["pronunciation"], "summary": "File audio pengucapan (statis, tanpa auth)",
-        "description": "Gunakan `target.audio_url` dari respons frasa. Berkas: `<key>.wav` (default, hasil Piper) "
-                       "atau `<key>.mp3` bila audio dikonversi.",
-        "security": [],
-        "parameters": [
-            {"name": "lang", "in": "path", "required": True, "schema": {"type": "string"}, "example": "de_DE"},
-            {"name": "file", "in": "path", "required": True, "schema": {"type": "string"}, "example": "greet_hello.wav"}],
-        "responses": {"200": {"description": "audio/wav atau audio/mpeg", "content": {
-            "audio/wav": {"schema": {"type": "string", "format": "binary"}},
-            "audio/mpeg": {"schema": {"type": "string", "format": "binary"}}}},
-            "404": {"description": "Audio belum tersedia"}}}}
-
     # Pasang security hanya pada endpoint yang memang butuh auth (bawaan FastAPI sudah per-operasi)
     schemas = {**phrase["components"].get("schemas", {}), **user["components"].get("schemas", {})}
     sec = {**phrase["components"].get("securitySchemes", {}), **user["components"].get("securitySchemes", {})}
@@ -64,13 +51,13 @@ def main():
         "info": {
             "title": "LingoGo API", "version": "1.0.0",
             "description": (
-                "API LingoGo (Tourism Language Assistance) — frasa, terjemahan, pelafalan & audio.\n\n"
+                "API LingoGo (Tourism Language Assistance) — cari kota di Indonesia, bahasa daerahnya, frasa, pelafalan & arti.\n\n"
                 "**Autentikasi**\n- Pengguna aplikasi: `Authorization: Bearer <JWT>` dari `POST /auth/login`.\n"
                 "- Kelompok lain (server ke server): header `X-API-Key` (minta ke kelompok lingogo).\n"
                 "- Dibatasi rate limit per IP (HTTP 429 jika berlebihan).")},
         "servers": [{"url": a.base_url.rstrip("/") + "/api"}],
-        "tags": [{"name": t} for t in ("system", "auth", "users", "destination-language",
-                                       "phrasebook", "pronunciation", "admin")],
+        "tags": [{"name": t} for t in ("system", "auth", "users", "region", "language",
+                                       "phrasebook", "admin")],
         "paths": dict(sorted(paths.items())),
         "components": {"schemas": schemas, "securitySchemes": sec},
     }
@@ -122,28 +109,31 @@ def postman(base):
                 body={"email": "{{adminEmail}}", "password": "{{adminPassword}}"}, test=save_admin),
             req("Me", "GET", "/auth/me", auth="bearer", test=ok(200)),
             req("Ubah preferensi", "PATCH", "/users/me/preferences", auth="bearer",
-                body={"ui_language": "id", "pron_style": "id", "target_language": "de_DE"}, test=ok(200)),
+                body={"ui_language": "id", "pron_style": "id", "target_language": "jv_ID", "default_city": "3578"}, test=ok(200)),
             req("Lihat preferensi", "GET", "/users/me/preferences", auth="bearer", test=ok(200)),
             req("Logout (cabut token)", "POST", "/auth/logout", auth="bearer", test=ok(204))]),
-        ("Destination & Language (X-API-Key)", [
+        ("Wilayah (X-API-Key)", [
+            req("Daftar provinsi", "GET", "/provinces", query={"ui": "id"}, test=ok(200)),
+            req("Cari kota: surabaya", "GET", "/cities", query={"q": "surabaya", "ui": "id"}, test=ok(200)),
+            req("Cari kota: Kota Malang (hanya kota)", "GET", "/cities", query={"q": "Kota Malang"}, test=ok(200)),
+            req("Cari kota tidak ada -> 404 + pesan", "GET", "/cities", query={"q": "atlantis", "ui": "id"}, test=ok(404)),
+            req("Kota di provinsi", "GET", "/provinces/35/cities", query={"ui": "id"}, test=ok(200)),
+            req("Detail kota", "GET", "/cities/3578", query={"ui": "id"}, test=ok(200)),
+            req("Nomor darurat nasional", "GET", "/emergency-numbers", query={"ui": "id"}, test=ok(200))]),
+        ("Bahasa & Phrasebook (X-API-Key)", [
             req("Daftar bahasa", "GET", "/languages", query={"ui": "id"}, test=ok(200)),
-            req("Detail bahasa", "GET", "/languages/de_DE", test=ok(200)),
-            req("Daftar destinasi", "GET", "/destinations", query={"ui": "id"}, test=ok(200)),
-            req("Bahasa di destinasi", "GET", "/destinations/CH/languages", test=ok(200)),
-            req("Nomor darurat satu destinasi", "GET", "/destinations/DE/emergency-numbers", test=ok(200)),
-            req("Nomor darurat semua destinasi", "GET", "/emergency-numbers", query={"ui": "id"}, test=ok(200))]),
-        ("Phrasebook (X-API-Key)", [
             req("Kategori", "GET", "/categories", query={"ui": "id"}, test=ok(200)),
-            req("Daftar frasa (UI id, pelafalan id)", "GET", "/phrases", test=ok(200),
-                query={"lang": "de_DE", "from": "id", "pron": "id", "category": "greeting"}),
-            req("Cari frasa", "GET", "/phrases", query={"lang": "fr_FR", "q": "merci"}, test=ok(200)),
-            req("Satu frasa", "GET", "/phrases/greet_hello", test=ok(200),
-                query={"lang": "ja_JP", "from": "en", "pron": "en"})]),
+            req("Phrasebook kota (alur utama)", "GET", "/cities/3578/phrasebook", query={"ui": "id", "pron": "id"}, test=ok(200)),
+            req("Phrasebook kota berbahasa ganda", "GET", "/cities/3274/phrasebook", query={"lang": "su_ID", "ui": "en"}, test=ok(200)),
+            req("Phrasebook per bahasa", "GET", "/languages/ban_ID/phrasebook", query={"ui": "en", "pron": "en"}, test=ok(200)),
+            req("Daftar frasa (datar)", "GET", "/phrases", test=ok(200),
+                query={"lang": "jv_ID", "ui": "id", "pron": "id", "category": "greeting"}),
+            req("Satu frasa", "GET", "/phrases/greet_hello", test=ok(200), query={"lang": "jv_ID", "ui": "en"})]),
         ("Admin (JWT admin)", [
-            req("Ubah pelafalan", "PUT", "/phrases/basic_yes/translations/de_DE", auth="admin",
+            req("Ubah pelafalan", "PUT", "/phrases/basic_yes/translations/jv_ID", auth="admin",
                 body={"pronunciation_id": "YA"}, test=ok(200))]),
         ("Tanpa kunci (harus 401)", [
-            req("Languages tanpa auth", "GET", "/languages", auth=None, test=ok(401))]),
+            req("Cari kota tanpa auth", "GET", "/cities?q=surabaya", auth=None, test=ok(401))]),
     ]
     return {
         "info": {"name": "LingoGo API", "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",

@@ -4,7 +4,6 @@ WORKDIR /srv
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 COPY app ./app
-COPY data ./data
 RUN useradd -r -u 1001 svc && mkdir -p /data && chown svc /data
 USER svc
 EXPOSE 8000

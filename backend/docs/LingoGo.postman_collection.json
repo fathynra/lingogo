@@ -303,7 +303,7 @@
             },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"ui_language\": \"id\",\n  \"pron_style\": \"id\",\n  \"target_language\": \"de_DE\"\n}"
+              "raw": "{\n  \"ui_language\": \"id\",\n  \"pron_style\": \"id\",\n  \"target_language\": \"jv_ID\",\n  \"default_city\": \"3578\"\n}"
             }
           },
           "event": [
@@ -388,7 +388,289 @@
       ]
     },
     {
-      "name": "Destination & Language (X-API-Key)",
+      "name": "Wilayah (X-API-Key)",
+      "item": [
+        {
+          "name": "Daftar provinsi",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{apiKey}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/provinces?ui=id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "provinces"
+              ],
+              "query": [
+                {
+                  "key": "ui",
+                  "value": "id"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('status 200', () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Cari kota: surabaya",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{apiKey}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/cities?q=surabaya&ui=id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "cities"
+              ],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "surabaya"
+                },
+                {
+                  "key": "ui",
+                  "value": "id"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('status 200', () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Cari kota: Kota Malang (hanya kota)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{apiKey}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/cities?q=Kota Malang",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "cities"
+              ],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "Kota Malang"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('status 200', () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Cari kota tidak ada -> 404 + pesan",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{apiKey}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/cities?q=atlantis&ui=id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "cities"
+              ],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "atlantis"
+                },
+                {
+                  "key": "ui",
+                  "value": "id"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('status 404', () => pm.response.to.have.status(404));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Kota di provinsi",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{apiKey}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/provinces/35/cities?ui=id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "provinces",
+                "35",
+                "cities"
+              ],
+              "query": [
+                {
+                  "key": "ui",
+                  "value": "id"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('status 200', () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Detail kota",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{apiKey}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/cities/3578?ui=id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "cities",
+                "3578"
+              ],
+              "query": [
+                {
+                  "key": "ui",
+                  "value": "id"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('status 200', () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Nomor darurat nasional",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{apiKey}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/emergency-numbers?ui=id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "emergency-numbers"
+              ],
+              "query": [
+                {
+                  "key": "ui",
+                  "value": "id"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('status 200', () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Bahasa & Phrasebook (X-API-Key)",
       "item": [
         {
           "name": "Daftar bahasa",
@@ -429,188 +711,6 @@
           ]
         },
         {
-          "name": "Detail bahasa",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "X-API-Key",
-                "value": "{{apiKey}}"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/languages/de_DE",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "languages",
-                "de_DE"
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('status 200', () => pm.response.to.have.status(200));"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Daftar destinasi",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "X-API-Key",
-                "value": "{{apiKey}}"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/destinations?ui=id",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "destinations"
-              ],
-              "query": [
-                {
-                  "key": "ui",
-                  "value": "id"
-                }
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('status 200', () => pm.response.to.have.status(200));"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Bahasa di destinasi",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "X-API-Key",
-                "value": "{{apiKey}}"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/destinations/CH/languages",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "destinations",
-                "CH",
-                "languages"
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('status 200', () => pm.response.to.have.status(200));"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Nomor darurat satu destinasi",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "X-API-Key",
-                "value": "{{apiKey}}"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/destinations/DE/emergency-numbers",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "destinations",
-                "DE",
-                "emergency-numbers"
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('status 200', () => pm.response.to.have.status(200));"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Nomor darurat semua destinasi",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "X-API-Key",
-                "value": "{{apiKey}}"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/emergency-numbers?ui=id",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "emergency-numbers"
-              ],
-              "query": [
-                {
-                  "key": "ui",
-                  "value": "id"
-                }
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('status 200', () => pm.response.to.have.status(200));"
-                ]
-              }
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "Phrasebook (X-API-Key)",
-      "item": [
-        {
           "name": "Kategori",
           "request": {
             "method": "GET",
@@ -649,7 +749,7 @@
           ]
         },
         {
-          "name": "Daftar frasa (UI id, pelafalan id)",
+          "name": "Phrasebook kota (alur utama)",
           "request": {
             "method": "GET",
             "header": [
@@ -659,29 +759,23 @@
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/phrases?lang=de_DE&from=id&pron=id&category=greeting",
+              "raw": "{{baseUrl}}/cities/3578/phrasebook?ui=id&pron=id",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
-                "phrases"
+                "cities",
+                "3578",
+                "phrasebook"
               ],
               "query": [
                 {
-                  "key": "lang",
-                  "value": "de_DE"
-                },
-                {
-                  "key": "from",
+                  "key": "ui",
                   "value": "id"
                 },
                 {
                   "key": "pron",
                   "value": "id"
-                },
-                {
-                  "key": "category",
-                  "value": "greeting"
                 }
               ]
             }
@@ -699,7 +793,7 @@
           ]
         },
         {
-          "name": "Cari frasa",
+          "name": "Phrasebook kota berbahasa ganda",
           "request": {
             "method": "GET",
             "header": [
@@ -709,7 +803,95 @@
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/phrases?lang=fr_FR&q=merci",
+              "raw": "{{baseUrl}}/cities/3274/phrasebook?lang=su_ID&ui=en",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "cities",
+                "3274",
+                "phrasebook"
+              ],
+              "query": [
+                {
+                  "key": "lang",
+                  "value": "su_ID"
+                },
+                {
+                  "key": "ui",
+                  "value": "en"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('status 200', () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Phrasebook per bahasa",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{apiKey}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/languages/ban_ID/phrasebook?ui=en&pron=en",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "languages",
+                "ban_ID",
+                "phrasebook"
+              ],
+              "query": [
+                {
+                  "key": "ui",
+                  "value": "en"
+                },
+                {
+                  "key": "pron",
+                  "value": "en"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('status 200', () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Daftar frasa (datar)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{apiKey}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/phrases?lang=jv_ID&ui=id&pron=id&category=greeting",
               "host": [
                 "{{baseUrl}}"
               ],
@@ -719,11 +901,19 @@
               "query": [
                 {
                   "key": "lang",
-                  "value": "fr_FR"
+                  "value": "jv_ID"
                 },
                 {
-                  "key": "q",
-                  "value": "merci"
+                  "key": "ui",
+                  "value": "id"
+                },
+                {
+                  "key": "pron",
+                  "value": "id"
+                },
+                {
+                  "key": "category",
+                  "value": "greeting"
                 }
               ]
             }
@@ -751,7 +941,7 @@
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/phrases/greet_hello?lang=ja_JP&from=en&pron=en",
+              "raw": "{{baseUrl}}/phrases/greet_hello?lang=jv_ID&ui=en",
               "host": [
                 "{{baseUrl}}"
               ],
@@ -762,14 +952,10 @@
               "query": [
                 {
                   "key": "lang",
-                  "value": "ja_JP"
+                  "value": "jv_ID"
                 },
                 {
-                  "key": "from",
-                  "value": "en"
-                },
-                {
-                  "key": "pron",
+                  "key": "ui",
                   "value": "en"
                 }
               ]
@@ -807,7 +993,7 @@
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/phrases/basic_yes/translations/de_DE",
+              "raw": "{{baseUrl}}/phrases/basic_yes/translations/jv_ID",
               "host": [
                 "{{baseUrl}}"
               ],
@@ -815,7 +1001,7 @@
                 "phrases",
                 "basic_yes",
                 "translations",
-                "de_DE"
+                "jv_ID"
               ]
             },
             "body": {
@@ -841,17 +1027,17 @@
       "name": "Tanpa kunci (harus 401)",
       "item": [
         {
-          "name": "Languages tanpa auth",
+          "name": "Cari kota tanpa auth",
           "request": {
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/languages",
+              "raw": "{{baseUrl}}/cities?q=surabaya",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
-                "languages"
+                "cities?q=surabaya"
               ]
             }
           },

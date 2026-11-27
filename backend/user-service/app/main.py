@@ -62,7 +62,7 @@ def _user_out(r) -> schemas.UserOut:
         id=r["id"], name=r["name"], email=r["email"], role=r["role"],
         preferences=schemas.Preferences(
             ui_language=r["ui_language"], pron_style=r["pron_style"],
-            target_language=r["target_language"], default_destination=r["default_destination"]))
+            target_language=r["target_language"], default_city=r["default_city"]))
 
 
 def current_claims(cred: HTTPAuthorizationCredentials | None = Depends(_bearer)) -> dict:
@@ -144,7 +144,7 @@ def get_prefs(claims: dict = Depends(current_claims)):
 
 
 @app.patch("/users/me/preferences", response_model=schemas.Preferences, tags=["users"],
-           summary="Ubah preferensi (bahasa UI, gaya pelafalan, bahasa tujuan, destinasi)")
+           summary="Ubah preferensi (bahasa UI, gaya pelafalan, bahasa daerah, kota)")
 def update_prefs(body: schemas.PreferencesUpdate, claims: dict = Depends(current_claims)):
     data = body.model_dump(exclude_unset=True)
     if not data:
@@ -153,7 +153,7 @@ def update_prefs(body: schemas.PreferencesUpdate, claims: dict = Depends(current
         if k in data and data[k] is None:
             raise HTTPException(422, f"{k} tidak boleh null")
     # '' -> NULL
-    data = {k: (v or None) if k in ("target_language", "default_destination") else v
+    data = {k: (v or None) if k in ("target_language", "default_city") else v
             for k, v in data.items()}
     sets = ", ".join(f"{k}=?" for k in data)  # kunci berasal dari skema, bukan input mentah
     with db.get_db() as con:

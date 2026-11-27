@@ -3,54 +3,62 @@ from contextlib import contextmanager
 
 from . import config
 
+# Naikkan angka ini setiap skema berubah: database turunan (dari CSV) akan dibuat ulang otomatis.
+SCHEMA_VERSION = "2"
+
 SCHEMA = """
-CREATE TABLE IF NOT EXISTS languages (
-  code TEXT PRIMARY KEY, name_en TEXT NOT NULL, name_id TEXT NOT NULL,
-  native_name TEXT NOT NULL, country_code TEXT NOT NULL, voice TEXT
+CREATE TABLE languages (
+  code TEXT PRIMARY KEY, name_id TEXT NOT NULL, name_en TEXT NOT NULL, native_name TEXT NOT NULL,
+  closest_code TEXT NOT NULL, is_approximate INTEGER NOT NULL CHECK (is_approximate IN (0,1))
 );
-CREATE TABLE IF NOT EXISTS destinations (
-  code TEXT PRIMARY KEY, name_en TEXT NOT NULL, name_id TEXT NOT NULL
+CREATE TABLE provinces (
+  code TEXT PRIMARY KEY, name_id TEXT NOT NULL, name_en TEXT NOT NULL
 );
-CREATE TABLE IF NOT EXISTS destination_languages (
-  destination_code TEXT NOT NULL REFERENCES destinations(code),
+CREATE TABLE province_languages (
+  province_code TEXT NOT NULL REFERENCES provinces(code),
   language_code TEXT NOT NULL REFERENCES languages(code),
-  PRIMARY KEY (destination_code, language_code)
+  position INTEGER NOT NULL,                       -- 0 = bahasa utama
+  PRIMARY KEY (province_code, language_code)
 );
-CREATE TABLE IF NOT EXISTS categories (
-  code TEXT PRIMARY KEY, name_en TEXT NOT NULL, name_id TEXT NOT NULL,
-  sort_order INTEGER NOT NULL
+CREATE TABLE cities (
+  code TEXT PRIMARY KEY, name TEXT NOT NULL, name_norm TEXT NOT NULL,
+  type TEXT NOT NULL CHECK (type IN ('kota','kabupaten')),
+  province_code TEXT NOT NULL REFERENCES provinces(code)
 );
-CREATE TABLE IF NOT EXISTS phrases (
-  key TEXT PRIMARY KEY, category_code TEXT NOT NULL REFERENCES categories(code)
+CREATE TABLE city_languages (
+  city_code TEXT NOT NULL REFERENCES cities(code),
+  language_code TEXT NOT NULL REFERENCES languages(code),
+  position INTEGER NOT NULL,
+  PRIMARY KEY (city_code, language_code)
 );
-CREATE TABLE IF NOT EXISTS translations (
+CREATE TABLE categories (
+  code TEXT PRIMARY KEY, name_en TEXT NOT NULL, name_id TEXT NOT NULL, sort_order INTEGER NOT NULL
+);
+CREATE TABLE phrases (
+  key TEXT PRIMARY KEY, category_code TEXT NOT NULL REFERENCES categories(code),
+  meaning_id TEXT NOT NULL, meaning_en TEXT NOT NULL, sort_order INTEGER NOT NULL
+);
+CREATE TABLE translations (
   phrase_key TEXT NOT NULL REFERENCES phrases(key),
   lang TEXT NOT NULL REFERENCES languages(code),
   text TEXT NOT NULL,
   PRIMARY KEY (phrase_key, lang)
 );
-CREATE TABLE IF NOT EXISTS pronunciations (
+CREATE TABLE pronunciations (
   phrase_key TEXT NOT NULL REFERENCES phrases(key),
   lang TEXT NOT NULL REFERENCES languages(code),
   style TEXT NOT NULL CHECK (style IN ('en','id')),
   guide TEXT NOT NULL,
   PRIMARY KEY (phrase_key, lang, style)
 );
-CREATE TABLE IF NOT EXISTS audio (
-  phrase_key TEXT NOT NULL REFERENCES phrases(key),
-  lang TEXT NOT NULL REFERENCES languages(code),
-  path TEXT NOT NULL,
-  PRIMARY KEY (phrase_key, lang)
+CREATE TABLE emergency_numbers (
+  service TEXT PRIMARY KEY, name_id TEXT NOT NULL, name_en TEXT NOT NULL, number TEXT NOT NULL
 );
-CREATE TABLE IF NOT EXISTS emergency_numbers (
-  country_code TEXT NOT NULL,
-  service TEXT NOT NULL CHECK (service IN ('police','fire','ambulance')),
-  number TEXT NOT NULL,
-  PRIMARY KEY (country_code, service)
-);
-CREATE TABLE IF NOT EXISTS meta (key TEXT PRIMARY KEY, value TEXT NOT NULL);
-CREATE INDEX IF NOT EXISTS idx_phrases_cat ON phrases(category_code);
-CREATE INDEX IF NOT EXISTS idx_trans_lang ON translations(lang);
+CREATE TABLE meta (key TEXT PRIMARY KEY, value TEXT NOT NULL);
+CREATE INDEX idx_cities_norm ON cities(name_norm);
+CREATE INDEX idx_cities_prov ON cities(province_code);
+CREATE INDEX idx_phrases_cat ON phrases(category_code);
+CREATE INDEX idx_trans_lang ON translations(lang);
 """
 
 
@@ -65,8 +73,22 @@ def connect(path=None) -> sqlite3.Connection:
 
 
 def init_schema(con: sqlite3.Connection) -> None:
+    """Buat skema. Jika versi skema berbeda (mis. database lama dari versi dunia), hapus & buat ulang:
+    isi database ini 100% turunan dari CSV sehingga aman diisi ulang."""
+    names = [r[0] for r in con.execute("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'")]
+    ok = False
+    if "meta" in names:
+        row = con.execute("SELECT value FROM meta WHERE key='schema_version'").fetchone()
+        ok = bool(row) and row[0] == SCHEMA_VERSION
+    if ok:
+        return
+    con.execute("PRAGMA foreign_keys=OFF")
+    for n in names:
+        con.execute(f'DROP TABLE IF EXISTS "{n}"')
     con.executescript(SCHEMA)
+    con.execute("INSERT INTO meta VALUES ('schema_version', ?)", (SCHEMA_VERSION,))
     con.commit()
+    con.execute("PRAGMA foreign_keys=ON")
 
 
 @contextmanager

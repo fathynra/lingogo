@@ -1,0 +1,6 @@
+service,name_id,name_en,number
+police,Polisi,Police,110
+fire,Pemadam Kebakaran,Fire Department,113
+ambulance,Ambulans,Ambulance,119
+sar,SAR (Basarnas),Search and Rescue,115
+general,Darurat Umum,General Emergency,112

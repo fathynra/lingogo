@@ -1,0 +1,31 @@
+key,category,jv_ID,su_ID,ban_ID,osi_ID
+greet_hello,greeting,HA-lo,HA-lo,om swas-ti-AS-tu,HA-lo
+greet_morning,greeting,SU-geng EN-jing,wi-LU-jeng É-njing,ra-HA-jeng SE-meng,SU-geng EN-jing
+greet_goodbye,greeting,KU-lo PA-mit,AB-di PA-mit,TI-ti-ang MA-mit,KU-lo PA-mit
+intro_name,intro,NA-mi KU-lo,NA-mi AB-di,PA-rab TI-ti-ang,NA-mi KU-lo
+polite_sorry,polite,NYU-wun nga-PUN-ten,ha-PUN-ten,TI-ti-ang NU-nas am-PU-ra,NYU-wun nga-PUN-ten
+polite_excuse,polite,NU-wun SÉ-wu,PUN-ten,NU-nas am-PU-ra,NU-wun SÉ-wu
+polite_thanks,polite,ma-TUR NU-wun,HA-tur NU-hun,SUK-sma,ma-TUR NU-wun
+polite_welcome,polite,SA-mi SA-mi,SA-mi SA-mi,SUK-sma me-WA-li,SA-mi SA-mi
+polite_please,polite,MONG-go,MANG-ga,du-RU-sang,MONG-go
+basic_yes,basic,ING-gih,MU-hun,ING-gih,ING-gih
+basic_no,basic,MBO-ten,HEN-te-u,ten,MBO-ten
+shop_how_much,shopping,NI-ki PIN-ten re-GI-ne,sa-ba-RA-ha har-GA-na I-yeu,A-ji KU-da NI-ki,NI-ki PIN-ten re-GI-ne
+shop_buy_this,shopping,KU-lo BA-dhe TUM-bas NI-ki,AB-di ba-DÉ MÉ-sér I-yeu,TI-ti-ang JA-gi NUM-bas NI-ki,KU-lo BA-dhe TUM-bas NI-ki
+shop_too_expensive,shopping,NI-ki A-wis SA-nget,I-yeu A-wis PI-san,NI-ki MA-el PI-san,NI-ki A-wis SA-nget
+shop_discount,shopping,SA-ged KI-rang MBO-ten,ti-A-sa di-ki-RA-ngan har-GA-na,DA-dos ki-RA-ngin,SA-ged KI-rang MBO-ten
+shop_card,shopping,SA-ged mba-YAR ka-LI-yan KAR-tu,ti-A-sa ma-YAR NGANG-go KAR-tu,DA-dos MA-yah NGANG-ge KAR-tu,SA-ged mba-YAR ka-LI-yan KAR-tu
+help_toilet,help,KA-mar ke-CIL WON-ten PUN-di,toi-LÉT A-ya di MA-na,TOI-let WEN-ten DI-ja,KA-mar ke-CIL WON-ten PUN-di
+help_help_me,help,SA-ged mbi-YAN-tu KU-lo,ti-A-sa nga-ban-TO-san AB-di,DA-dos tu-LU-ngin TI-ti-ang,SA-ged mbi-YAN-tu KU-lo
+help_dont_understand,help,KU-lo MBO-ten nger-TOS,AB-di TE-u NGAR-tos,TI-ti-ang NEN-ten MU-deng,KU-lo MBO-ten nger-TOS
+help_speak_english,help,pan-je-NE-ngan SA-ged BA-so ING-gris,an-JEUN ti-A-sa BA-sa ING-gris,NA-pi ra-GA-ne DA-dos ma-BA-sa ING-gris,pan-je-NE-ngan SA-ged BA-so ING-gris
+num_1,number,SI-ji,HI-ji,BE-sik,SI-ji
+num_2,number,LO-ro,DU-a,KA-lih,LO-ro
+num_3,number,TE-lu,TI-lu,TI-ga,TE-lu
+num_4,number,PA-pat,O-pat,PA-pat,PA-pat
+num_5,number,LI-mo,LI-ma,LI-ma,LI-mo
+num_6,number,E-nem,GE-nep,nem,E-nem
+num_7,number,PI-tu,TU-juh,PI-tu,PI-tu
+num_8,number,WO-lu,da-LA-pan,KU-tus,WO-lu
+num_9,number,SA-ngo,sa-LA-pan,SI-a,SA-ngo
+num_10,number,se-PU-luh,sa-PU-luh,DA-sa,se-PU-luh

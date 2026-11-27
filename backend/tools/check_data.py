@@ -1,119 +1,58 @@
 #!/usr/bin/env python3
-"""Periksa konsistensi folder tts/ dengan data master backend. Jalankan sebelum commit/deploy:
+"""Periksa folder database/ (CSV). Jalankan sebelum commit/deploy:
 
-    python tools/check_data.py                # asumsi: backend/ dan tts/ bersaudara
-    python tools/check_data.py --tts ../tts --audio ../tts/out/audio
+    python tools/check_data.py                    # asumsi: backend/ dan database/ bersaudara
+    python tools/check_data.py --database ../database --full
 
-Exit code 1 jika ada masalah (cocok untuk CI).
+Aturan: tidak boleh ada sel kosong, semua referensi (bahasa, provinsi, kategori) harus valid.
+--full : syarat kelengkapan akhir (tepat 38 provinsi & tiap provinsi punya kota). Exit code 1 jika ada masalah.
 """
 import argparse
-import csv
-import json
 import sys
+from collections import Counter
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-
-
-def rows(p):
-    with open(p, encoding="utf-8-sig", newline="") as f:
-        return list(csv.DictReader(f))
+sys.path.insert(0, str(ROOT / "phrase-service"))
+from app import dataset  # noqa: E402  (dataset.py hanya memakai pustaka standar)
 
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--tts", type=Path, default=ROOT.parent / "tts")
-    ap.add_argument("--audio", type=Path, default=None, help="default: <tts>/out/audio")
+    ap.add_argument("--database", type=Path, default=ROOT.parent / "database")
+    ap.add_argument("--full", action="store_true", help="wajib 38 provinsi & tiap provinsi punya kota")
     a = ap.parse_args()
-    tts, audio = a.tts, a.audio or a.tts / "out" / "audio"
-    data = ROOT / "phrase-service" / "data"
-    errors, warns = [], []
+    try:
+        ds = dataset.load(a.database, full=a.full)
+    except dataset.DatasetError as e:
+        for p in e.problems:
+            print("ERROR     ", p)
+        print(f"{len(e.problems)} error")
+        sys.exit(1)
 
-    phrases = rows(tts / "phrases.csv")
-    cols = [c for c in phrases[0] if c not in ("key", "category")]
-    keys = [r["key"] for r in phrases]
-    print(f"frasa: {len(keys)} | bahasa di phrases.csv: {len(cols)}")
+    warns = []
+    langs = {l["code"]: l for l in ds.languages}
+    approx = [c for c, l in langs.items() if l["status"] == "approximate"]
+    print(f"provinsi: {len(ds.provinces)} | kota/kabupaten: {len(ds.cities)} | bahasa: {len(langs)} "
+          f"({len(langs) - len(approx)} asli, {len(approx)} terdekat) | frasa: {len(ds.phrases)} "
+          f"| kategori: {len(ds.categories)}")
+    for c in approx:
+        print(f"  bahasa terdekat: {c} -> {langs[c]['closest_code']}")
 
-    if len(set(keys)) != len(keys):
-        errors.append("key frasa duplikat di phrases.csv")
-    for r in phrases:
-        for c in cols:
-            if not r[c].strip():
-                errors.append(f"phrases.csv: {r['key']}/{c} kosong")
-
-    for name in ("phrases_pronunciation_en.csv", "phrases_pronunciation_id.csv"):
-        pr = rows(tts / name)
-        if [r["key"] for r in pr] != keys:
-            errors.append(f"{name}: urutan/isi key berbeda dari phrases.csv")
-        if [c for c in pr[0] if c not in ("key", "category")] != cols:
-            errors.append(f"{name}: kolom bahasa berbeda dari phrases.csv")
-        for r in pr:
-            for c in cols:
-                if not (r.get(c) or "").strip():
-                    errors.append(f"{name}: {r['key']}/{c} kosong")
-
-    voices = json.loads((tts / "voices.json").read_text(encoding="utf-8"))
-    langs = rows(data / "languages.csv")
-    lang_codes = {r["code"] for r in langs}
-    if lang_codes != set(cols):
-        errors.append(f"languages.csv vs phrases.csv: selisih {sorted(lang_codes ^ set(cols))}")
-    if set(voices) != set(cols):
-        errors.append(f"voices.json vs phrases.csv: selisih {sorted(set(voices) ^ set(cols))}")
-
-    cats = {r["code"] for r in rows(data / "categories.csv")}
-    for r in phrases:
-        if r["category"] not in cats:
-            errors.append(f"kategori '{r['category']}' ({r['key']}) tidak ada di categories.csv")
-    for d in rows(data / "destinations.csv"):
-        for l in d["languages"].split(";"):
-            if l not in lang_codes:
-                errors.append(f"destinations.csv: {d['code']} memakai bahasa tak dikenal {l}")
-
-    # audio
-    if not audio.is_dir():
-        errors.append(f"folder audio tidak ada: {audio}")
-    else:
-        have = {(p.parent.name, p.stem) for p in audio.glob("*/*") if p.suffix in (".wav", ".mp3")}
-        want = {(l, k) for l in cols for k in keys}
-        missing, extra = sorted(want - have), sorted(have - want)
-        print(f"audio: {len(have & want)}/{len(want)} tersedia")
-        by_lang = {}
-        for l, k in missing:
-            by_lang.setdefault(l, []).append(k)
-        for l, ks in by_lang.items():
-            errors.append(f"audio {l}: kurang {len(ks)} ({', '.join(ks[:4])}{'...' if len(ks) > 4 else ''})")
-        for l, k in extra[:10]:
-            warns.append(f"audio tak dikenal: {l}/{k}")
-        empty = [p for p in audio.glob("*/*.wav") if p.stat().st_size < 1000]
-        for p in empty:
-            errors.append(f"audio terlalu kecil/rusak: {p.parent.name}/{p.name} ({p.stat().st_size} B)")
-
-    # nomor darurat
-    em = rows(tts / "emergency_numbers.csv")
-    country = {r["code"]: r["country_code"] for r in langs}
-    seen = {}
-    for r in em:
-        for l in cols:
-            v = (r.get(l) or "").strip()
-            if not v:
-                warns.append(f"emergency_numbers.csv: {r['key']}/{l} kosong")
-                continue
-            if not v.isdigit():
-                errors.append(f"emergency_numbers.csv: {r['key']}/{l} bukan angka: {v!r}")
-            prev = seen.setdefault((country[l], r["key"]), (v, l))
-            if prev[0] != v:
-                errors.append(f"nomor darurat {country[l]} {r['key']} konflik: {prev} vs {(v, l)}")
-    dests = {d["code"] for d in rows(data / "destinations.csv")}
-    no_num = sorted(dests - {c for c, _ in seen})
-    if no_num:
-        warns.append(f"destinasi tanpa nomor darurat: {', '.join(no_num)}")
-
-    for w in warns:
+    used = {l for p in ds.provinces for l in p["languages"]} | {l for c in ds.cities for l in c["languages"]}
+    for c in langs:
+        if c not in used:
+            warns.append(f"bahasa {c} tidak dipakai provinsi/kota mana pun")
+    per_prov = Counter(c["province_code"] for c in ds.cities)
+    for p in ds.provinces:
+        if not per_prov[p["code"]]:
+            warns.append(f"provinsi {p['code']} {p['name_id']} belum punya kota")
+    if not a.full:
+        warns.append(f"mode longgar: {len(ds.provinces)}/{dataset.EXPECTED_PROVINCES} provinsi (pakai --full untuk syarat akhir)"
+                     if len(ds.provinces) != dataset.EXPECTED_PROVINCES else "")
+    for w in filter(None, warns):
         print("PERINGATAN", w)
-    for e in errors:
-        print("ERROR     ", e)
-    print("OK" if not errors else f"{len(errors)} error")
-    sys.exit(1 if errors else 0)
+    print("OK")
 
 
 if __name__ == "__main__":

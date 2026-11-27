@@ -1,1 +1,1 @@
-# LingoGo 
+# LingoGo
