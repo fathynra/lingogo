@@ -1,4 +1,4 @@
-"""Normalisasi teks untuk pencarian kota (huruf kecil, tanpa aksen/tanda baca)."""
+"""Normalisasi teks untuk pencarian kota."""
 import re
 import unicodedata
 

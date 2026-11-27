@@ -12,7 +12,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-import yaml
+import yaml  # pip install pyyaml
 
 ROOT = Path(__file__).resolve().parent.parent
 ENV = {**os.environ, "JWT_SECRET": "x" * 32, "DB_PATH": "/tmp/_export.db", "DATABASE_DIR": str(ROOT.parent / "database")}

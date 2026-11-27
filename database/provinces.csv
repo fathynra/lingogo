@@ -1,7 +1,39 @@
 code,name_id,name_en,languages
+11,Aceh,Aceh,ace_ID
+12,Sumatera Utara,North Sumatra,bbc_ID
+13,Sumatera Barat,West Sumatra,min_ID
+14,Riau,Riau,ms_ID
+15,Jambi,Jambi,ms_ID
+16,Sumatera Selatan,South Sumatra,plm_ID
+17,Bengkulu,Bengkulu,ms_ID
+18,Lampung,Lampung,ljp_ID
+19,Kepulauan Bangka Belitung,Bangka Belitung Islands,ms_ID
+21,Kepulauan Riau,Riau Islands,ms_ID
+31,DKI Jakarta,Jakarta,bew_ID
 32,Jawa Barat,West Java,su_ID
 33,Jawa Tengah,Central Java,jv_ID
 34,DI Yogyakarta,Special Region of Yogyakarta,jv_ID
 35,Jawa Timur,East Java,jv_ID
 36,Banten,Banten,su_ID
 51,Bali,Bali,ban_ID
+52,Nusa Tenggara Barat,West Nusa Tenggara,sas_ID
+53,Nusa Tenggara Timur,East Nusa Tenggara,mkn_ID
+61,Kalimantan Barat,West Kalimantan,ms_ID
+62,Kalimantan Tengah,Central Kalimantan,bjn_ID
+63,Kalimantan Selatan,South Kalimantan,bjn_ID
+64,Kalimantan Timur,East Kalimantan,bjn_ID
+65,Kalimantan Utara,North Kalimantan,bjn_ID
+71,Sulawesi Utara,North Sulawesi,xmm_ID
+72,Sulawesi Tengah,Central Sulawesi,kli_ID
+73,Sulawesi Selatan,South Sulawesi,bug_ID
+74,Sulawesi Tenggara,Southeast Sulawesi,lbw_ID
+75,Gorontalo,Gorontalo,gor_ID
+76,Sulawesi Barat,West Sulawesi,mdr_ID
+81,Maluku,Maluku,abs_ID
+82,Maluku Utara,North Maluku,max_ID
+91,Papua,Papua,pmy_ID
+92,Papua Barat,West Papua,pmy_ID
+93,Papua Selatan,South Papua,pmy_ID
+94,Papua Tengah,Central Papua,pmy_ID
+95,Papua Pegunungan,Highland Papua,pmy_ID
+96,Papua Barat Daya,Southwest Papua,pmy_ID

@@ -11,7 +11,7 @@ _bearer = HTTPBearer(auto_error=False, description="JWT dari POST /auth/login (u
 
 
 class Principal(dict):
-    """kind: 'user' | 'group'; role: 'user' | 'admin' | 'partner'."""
+    """kind: user | group, role: user | admin | partner"""
 
 
 def _unauthorized(msg: str):

@@ -1,31 +1,31 @@
-key,category,jv_ID,su_ID,ban_ID,osi_ID
-greet_hello,greeting,HAH-loh,HAH-loh,ohm swah-stee-AH-stoo,HAH-loh
-greet_morning,greeting,SOO-guhng UHN-jing,wee-LOO-juhng AYN-jing,rah-HAH-jeng SUH-muhng,SOO-guhng UHN-jing
-greet_goodbye,greeting,KOO-loh PAH-mit,AHB-dee PAH-mit,TEE-tee-ahng MAH-mit,KOO-loh PAH-mit
-intro_name,intro,NAH-mee KOO-loh,NAH-mee AHB-dee,PAH-rahb TEE-tee-ahng,NAH-mee KOO-loh
-polite_sorry,polite,NYOO-woon ngah-POON-tuhn,hah-POON-tuhn,TEE-tee-ahng NOO-nahs ahm-POO-rah,NYOO-woon ngah-POON-tuhn
-polite_excuse,polite,NOO-woon SAY-woo,POON-tuhn,NOO-nahs ahm-POO-rah,NOO-woon SAY-woo
-polite_thanks,polite,mah-TOOR NOO-woon,HAH-toor NOO-hoon,SOOK-smah,mah-TOOR NOO-woon
-polite_welcome,polite,SAH-mee SAH-mee,SAH-mee SAH-mee,SOOK-smah muh-WAH-lee,SAH-mee SAH-mee
-polite_please,polite,MOHNG-goh,MAHNG-gah,doo-ROO-sahng,MOHNG-goh
-basic_yes,basic,ING-gih,MOO-hoon,ING-gih,ING-gih
-basic_no,basic,MBOH-tuhn,HUHN-tuh-oo,tehn,MBOH-tuhn
-shop_how_much,shopping,NEE-kee PIN-tuhn ruh-GEE-neh,sah-bah-RAH-hah hahr-GAH-nah EE-yuh,AH-jee KOO-dah NEE-kee,NEE-kee PIN-tuhn ruh-GEE-neh
-shop_buy_this,shopping,KOO-loh BAH-dheh TOOM-bahs NEE-kee,AHB-dee bah-DAY MAY-sur EE-yuh,TEE-tee-ahng JAH-gee NOOM-bahs NEE-kee,KOO-loh BAH-dheh TOOM-bahs NEE-kee
-shop_too_expensive,shopping,NEE-kee AH-wis SAH-nguht,EE-yuh AH-wis PEE-sahn,NEE-kee MAH-ehl PEE-sahn,NEE-kee AH-wis SAH-nguht
-shop_discount,shopping,SAH-guhd KEE-rahng MBOH-tuhn,TEE-ah-sah dee-kee-RAHNG-ahn hahr-GAH-nah,DAH-dohs kee-RAHNG-in,SAH-guhd KEE-rahng MBOH-tuhn
-shop_card,shopping,SAH-guhd mbah-YAHR KAH-lee-yahn KAHR-too,TEE-ah-sah mah-YAHR NGAHNG-goh KAHR-too,DAH-dohs MAH-yah NGAHNG-geh KAHR-too,SAH-guhd mbah-YAHR KAH-lee-yahn KAHR-too
-help_toilet,help,KAH-mahr kuh-CHEEL WOHN-tuhn POON-dee,toy-LET AH-yah dee MAH-nah,TOY-leht WEHN-tehn DEE-jah,KAH-mahr kuh-CHEEL WOHN-tuhn POON-dee
-help_help_me,help,SAH-guhd mbee-YAHN-too KOO-loh,TEE-ah-sah ngah-bahn-TOH-sahn AHB-dee,DAH-dohs too-LOONG-in TEE-tee-ahng,SAH-guhd mbee-YAHN-too KOO-loh
-help_dont_understand,help,KOO-loh MBOH-tuhn nguhr-TOHS,AHB-dee TUH-oo NGAHR-tohs,TEE-tee-ahng NEHN-tehn MOO-dehng,KOO-loh MBOH-tuhn nguhr-TOHS
-help_speak_english,help,pahn-juh-NUH-ngahn SAH-guhd BAH-soh ING-gris,ahn-JUH-oon TEE-ah-sah BAH-sah ING-gris,NAH-pee rah-GAH-neh DAH-dohs mah-BAH-sah ING-gris,pahn-juh-NUH-ngahn SAH-guhd BAH-soh ING-gris
-num_1,number,SEE-jee,HEE-jee,BEH-sik,SEE-jee
-num_2,number,LOH-roh,DOO-ah,KAH-lih,LOH-roh
-num_3,number,TUH-loo,TEE-loo,TEE-gah,TUH-loo
-num_4,number,PAH-paht,OH-paht,PAH-paht,PAH-paht
-num_5,number,LEE-moh,LEE-mah,LEE-mah,LEE-moh
-num_6,number,UH-nuhm,GUH-nuhp,nehm,UH-nuhm
-num_7,number,PEE-too,TOO-jooh,PEE-too,PEE-too
-num_8,number,WOH-loo,dah-LAH-pahn,KOO-toos,WOH-loo
-num_9,number,SAH-ngoh,sah-LAH-pahn,SEE-ah,SAH-ngoh
-num_10,number,suh-POO-looh,sah-POO-looh,DAH-sah,suh-POO-looh
+key,category,jv_ID,su_ID,ban_ID,ace_ID,bbc_ID,min_ID,ms_ID,bew_ID,mad_ID,bug_ID,bjn_ID,xmm_ID,abs_ID,pmy_ID
+greet_hello,greeting,HAH-loh,HAH-loh,ohm swah-stee-AH-stoo,ahs-sah-lah-moo-ah-lah-EE-koom,HOH-rahs,ahs-sah-lah-moo-ah-lah-EE-koom,AH-pah KHAH-bahr,AH-puh KAH-bahr,sah-LAH-muht,TAH-buh,ahs-sah-lah-moo-ah-lah-EE-koom,HAH-loh,HAH-loh,HAH-loh
+greet_morning,greeting,SOO-guhng UHN-jing,wee-LOO-juhng AYN-jing,rah-HAH-jeng SUH-muhng,suh-LAH-maht BUH-ngoh,HOH-rahs suh-LAH-maht PAH-gee,sah-lah-MAH-eek PAH-gee,suh-LAH-maht PAH-gee,suh-LAH-muht PAH-gee,sah-LAH-muht LAHG-goo,sah-LAH-mah UH-luh,sah-LAH-maht bah-ee-SOO-kahn,suh-LAH-maht PAH-gee,suh-LAH-maht PAH-gee,suh-LAH-maht PAH-gee
+greet_goodbye,greeting,KOO-loh PAH-mit,AHB-dee PAH-mit,TEE-tee-ahng MAH-mit,sahm-POH-uh muh-ROOM-pohk LOHM,HOH-rahs MAH DEE HAH-moo,sahm-PAH-ee bah-SOO-oh bah-LEE-ahk,JOOM-puh LAH-gee,AHM-puh kuh-TUH-moo LAH-gee,SAHM-peh ah-TUHM-moh POH-leh,sahm-PAH-ee see-ROON-too pah-EE-muhng,sahm-PAH-ee bah-TAH-moo POO-lahng,SAHM-puh kuh-TUH-moo OO-lahng,SAHM-puh kah-TAH-moo LAH-ee,SAHM-puh kuh-TUH-moo LAH-gee
+intro_name,intro,NAH-mee KOO-loh,NAH-mee AHB-dee,PAH-rahb TEE-tee-ahng,NAHN LOHN,goh-AHR-hoo,NAH-moh AHM-boh,NAH-muh SAH-yuh,NAH-muh AH-yuh,TAHNG NYAH-mah,ah-SUHNG-koo,NGAH-rahn OO-loon,KEE-tah PUH NAH-mah,BUH-tah POONG NAH-mah,SAH POO NAH-mah
+polite_sorry,polite,NYOO-woon ngah-POON-tuhn,hah-POON-tuhn,TEE-tee-ahng NOO-nahs ahm-POO-rah,MUH-ah,sahn-TAH-bee,AHM-boh MEEN-tahk MAH-ahf,MAH-ahf,mah-AH-peen AH-yuh,sah-POH-rah,ahd-dahm-puh-NGUHK-kah,AHM-poon MAH-ahf,MAH-ahf JOH,MAH-ahf UH,MAH-ahf
+polite_excuse,polite,NOO-woon SAY-woo,POON-tuhn,NOO-nahs ahm-POO-rah,TAH-buhk,mahr-sahn-TAH-bee,MAH-ahf,TOOM-pahng LAH-loo,puhr-MEE-see,puhr-MEE-seh,TAH-buh,TAH-beek,puhr-MEE-see,puhr-MEE-see,puhr-MEE-see
+polite_thanks,polite,mah-TOOR NOO-woon,HAH-toor NOO-hoon,SOOK-smah,tuh-REE-mohng guh-NAH-suh,mah-oo-lee-AH-tuh,tah-REE-moh KAH-seeh,tuh-REE-muh KAH-seeh,mah-KAH-seeh,kah-LAHNG-kohng,tuh-REE-mah KAH-see,tah-REE-mah KAH-seeh,mah-KAH-suh,DAHN-kuh,tuh-REE-mah KAH-seeh
+polite_welcome,polite,SAH-mee SAH-mee,SAH-mee SAH-mee,SOOK-smah muh-WAH-lee,SAH-bahn SAH-bahn,sah-ROO-pah,SAH-moh SAH-moh,SAH-muh SAH-muh,SAH-muh SAH-muh,PAH-duh PAH-duh,PAH-dah PAH-dah,SAH-mah SAH-mah,SAH-mah SAH-mah,SAH-mah SAH-mah,SAH-mah SAH-mah
+polite_please,polite,MOHNG-goh,MAHNG-gah,doo-ROO-sahng,nuh-TOO-lohng,TOH-lohng,TOH-lohng,TOH-lohng,TOO-loong,TOH-lohng,too-LOO-ngee,TOO-loong,TOH-lohng,TOH-lohng,TOH-lohng
+basic_yes,basic,ING-gih,MOO-hoon,ING-gih,NYOH,OH-loh,EE-yoh,YUH,EE-yuh,UHNG-ghee,EE-yuh,EENG-geeh,EE-yoh,EE-yoh,EE-yoh
+basic_no,basic,MBOH-tuhn,HUHN-tuh-oo,tehn,HAH-nah,DAHNG,EEN-dahk,TAHK,KAH-gahk,UHN-juh,DUH,KAH-dah,NYAHN-dah,SUHNG,TRAH
+shop_how_much,shopping,NEE-kee PIN-tuhn ruh-GEE-neh,sah-bah-RAH-hah hahr-GAH-nah EE-yuh,AH-jee KOO-dah NEE-kee,PAH-doom YOOM NYOH-uh,sah-DEE-ah ahr-GAH-nah OHN,BAH-rah hah-RAH-goh EE-koh,buh-RAH-puh HAHR-guh NEE,buh-RAH-puh hahr-GAH-nyuh NEEH,sah-poh-NAH-pah ahr-GHUH-nah,see-AH-gah uhl-LEEN-nah EE-yay,bah-RAH-pah hah-rah-GAH-nyah,BRAH-pah HAHR-gah EE-nee,bah-RAH-pah HAHR-gah EE-nee,BRAH-pah HAHR-gah NEE
+shop_buy_this,shopping,KOO-loh BAH-dheh TOOM-bahs NEE-kee,AHB-dee bah-DAY MAY-sur EE-yuh,TEE-tee-ahng JAH-gee NOOM-bahs NEE-kee,LOHN KUH-nuhk BLOH-uh NYOH-uh,NAH-uhng mah-NOO-hohr OHN AH-hoo,AHM-boh NEE-oh mahm-BAH-lee EE-koh,SAH-yuh NAHK BUH-lee NEE,AH-yuh MAH-oo BUH-lee EE-nee,kah-OO-luh TUHR-roh MUHL-leh REH-yah,mah-uh-LOH-kah MUHL-lee EE-yay,OO-loon HAHN-dahk mah-NOO-kahr NAHNG EE-nee,KEE-tah MOH BUH-lee EE-nee,BUH-tah MAH-oo BAH-lee EE-nee,SAH MAH-oo BUH-lee EE-nee
+shop_too_expensive,shopping,NEE-kee AH-wis SAH-nguht,EE-yuh AH-wis PEE-sahn,NEE-kee MAH-ehl PEE-sahn,mah-HAH-ee THAHT,MAH-hahl HEE-ahn,MAH-hah BAH-nah,MAH-hahl SAH-ngaht,MAH-hahl AH-maht,LAH-rahng OHNG-ghoo,mah-SOO-lee SUHN-nah,LAH-rahng BAH-nahr,MAH-hahl SKAH-lee,MAH-hahl SKAH-lee,MAH-hahl SKAH-lee
+shop_discount,shopping,SAH-guhd KEE-rahng MBOH-tuhn,TEE-ah-sah dee-kee-RAHNG-ahn hahr-GAH-nah,DAH-dohs kee-RAHNG-in,JUHT KOO-ruhng,BOH-ee DOH HOO-rahng,BEE-sah KOO-rahng,BOH-luh KOO-rahng,BEE-sah KOO-rahng KAH-gahk,BEE-sah KOH-rahng,WUHD-deeng KOO-rahng,KAH-wah KOO-rahng,BOH-luh KOO-rahng,BEE-sah KOO-rahng KAH SUHNG,BEE-sah KOO-rahng KAH
+shop_card,shopping,SAH-guhd mbah-YAHR KAH-lee-yahn KAHR-too,TEE-ah-sah mah-YAHR NGAHNG-goh KAHR-too,DAH-dohs MAH-yah NGAHNG-geh KAHR-too,JUHT bah-YUH-uh NGOHN KAHR-too,BOH-ee DOH mahng-GAH-rahr pah-KAH-ee KAHR-too,BEE-sah bah-YEE-ah pah-KAH-ee KAHR-too,BOH-luh BAH-yahr pah-KAH-ee KAHD,BEE-sah BAH-yahr PAH-kuh KAHR-too,BEE-sah MAH-juhr NGAHNG-ghooy KAHR-too,WUHD-deeng mahb-bah-YAH-rah PAH-kuh KAHR-too,KAH-wah mahm-BAH-yahr pah-KAH-ee KAHR-too,BOH-luh BAH-yahr PAH-kuh KAHR-too,BEE-sah BAH-yahr PAH-kuh KAHR-too KAH,BEE-sah BAH-yahr PAH-kuh KAHR-too KAH
+help_toilet,help,KAH-mahr kuh-CHEEL WOHN-tuhn POON-dee,toy-LET AH-yah dee MAH-nah,TOY-leht WEHN-tehn DEE-jah,PAHT KAH-mahr EE-uh,dee-DEE-ah KAH-mahr MAHN-dee,DEE MAH KAH-mahr MAHN-dee,DEE MAH-nuh TAHN-dahs,WC DEE MAH-nuh,EH DEEM-mah KAH-mahr MAHN-dee,kuh-GAH-ee kah-MAH-rah mahn-DEET-tah,DEE MAH-nah JAHM-bahn,WC DEE MAH-nah,WC DEE MAH-nah,WC DEE MAH-nah
+help_help_me,help,SAH-guhd mbee-YAHN-too KOO-loh,TEE-ah-sah ngah-bahn-TOH-sahn AHB-dee,DAH-dohs too-LOONG-in TEE-tee-ahng,JUHT nuh-TOO-lohng LOHN,BOH-ee DOH HOH mah-ngoo-ROO-pee AH-hoo,BEE-sah TOH-lohng AHM-boh,BOH-luh TOH-lohng SAH-yuh,BEE-sah too-LOO-ngeen AH-yuh,BEE-sah NOH-lohng kah-OO-luh,WUHD-deeng too-LOO-ngee KAH,KAH-wah too-LOO-ngee OO-loon,BOH-luh TOH-lohng PAH KEE-tah,BEE-sah TOH-lohng BUH-tah KAH,KOH BEE-sah BAHN-too SAH KAH
+help_dont_understand,help,KOO-loh MBOH-tuhn nguhr-TOHS,AHB-dee TUH-oo NGAHR-tohs,TEE-tee-ahng NEHN-tehn MOO-dehng,LOHN HAH-nah MUHP-hohm,NDAHNG hoo-ahn-TOO-see,AHM-boh EEN-dahk mah-ngah-RAH-tee,SAH-yuh TAHK PAH-hahm,AH-yuh KAH-gahk NGAHR-tee,SEHNG-koh TAH NGAHR-teh,DUH oo-pah-HAH-ngee,OO-loon KAH-dah PAH-hahm,KEE-tah NYAHN-dah mah-NGAHR-tee,BUH-tah SUHNG mah-NGAHR-tee,SAH TRAH muh-NGUHR-tee
+help_speak_english,help,pahn-juh-NUH-ngahn SAH-guhd BAH-soh ING-gris,ahn-JUH-oon TEE-ah-sah BAH-sah ING-gris,NAH-pee rah-GAH-neh DAH-dohs mah-BAH-sah ING-gris,droh-UH-nuh JUHT bah-HAH-sah EENGG-ruh,BOH-ee DOH HOH mahr-HAH-tah EENGG-rees,BEE-sah bah-bah-HAH-soh eeng-GEE-reeh,AH-wahk BOH-luh CHAH-kahp EENGG-rees,SEE-too BEE-sah NGOH-mohng EENGG-rees,BUH-nah ah-BHUH-sah EENGG-rees,WUHD-deeng GAH mahb-bee-CHAH-rah BAH-sah EENGG-rees,PEE-ahn KAH-wah buh-bah-HAH-sah EENGG-rees,NGAH-nah BEE-sah bah-HAH-sah EENGG-rees,AH-luh BEE-sah bah-HAH-sah EENGG-rees KAH,KOH BEE-sah bah-HAH-sah EENGG-rees KAH
+num_1,number,SEE-jee,HEE-jee,BEH-sik,SAH,SAH-dah,CHEE-uhk,SAH-too,SAH-too,SEHT-tohng,SUHD-dee,AH-sah,SAH-too,SAH-too,SAH-too
+num_2,number,LOH-roh,DOO-ah,KAH-lih,DOO-ah,DOO-ah,DOO-oh,DOO-uh,DOO-uh,DOO-wuh,DOO-ah,DOO-ah,DOO-ah,DOO-ah,DOO-ah
+num_3,number,TUH-loo,TEE-loo,TEE-gah,LHUH-uh,TOH-loo,TEE-goh,TEE-guh,TEE-guh,TUHL-loh,TUHL-loo,TAH-loo,TEE-gah,TEE-gah,TEE-gah
+num_4,number,PAH-paht,OH-paht,PAH-paht,PUH-uht,OH-paht,AHM-puhk,UHM-paht,UHM-paht,UHM-pah,UHP-pah,AHM-paht,AHM-pah,AHM-pah,UHM-paht
+num_5,number,LEE-moh,LEE-mah,LEE-mah,LEE-mohng,LEE-mah,LEE-moh,LEE-muh,LEE-muh,LEH-mah,LEE-mah,LEE-mah,LEE-mah,LEE-mah,LEE-mah
+num_6,number,UH-nuhm,GUH-nuhp,nehm,NAHM,OH-nohm,AH-nahm,UH-nahm,UH-nuhm,UHN-nuhm,UHN-nuhng,AH-nahm,AH-nahm,AH-nahm,UH-nahm
+num_7,number,PEE-too,TOO-jooh,PEE-too,TOO-joh,PEE-too,too-JOO-ah,TOO-jooh,TOO-jooh,PUHT-tohng,PEE-too,PEE-too,TOO-jooh,TOO-jooh,TOO-jooh
+num_8,number,WOH-loo,dah-LAH-pahn,KOO-toos,LAH-pahn,WAH-loo,sah-LAH-pahn,LAH-pahn,duh-LAH-pahn,BAHL-loo,ah-ROO-wah,WAH-loo,duh-LAH-pahn,dah-LAH-pahng,duh-LAH-pahn
+num_9,number,SAH-ngoh,sah-LAH-pahn,SEE-ah,see-koo-RUH-uhng,SEE-ah,sahm-BEE-lahn,suhm-BEE-lahn,suhm-BEE-lahn,SAH-ngah,ah-SUH-rah,SAH-ngah,sahm-BEE-lahn,sahm-BEE-lahng,suhm-BEE-lahn
+num_10,number,suh-POO-looh,sah-POO-looh,DAH-sah,SEEP-loh,sahp-POO-loo,sah-poo-LOO-ah,suh-POO-looh,suh-POO-looh,sah-POH-loh,suhp-POO-loh,sah-POO-looh,sah-POO-loo,sah-POO-loo,suh-POO-looh

@@ -2,7 +2,8 @@ openapi: 3.1.0
 info:
   title: LingoGo API
   version: 1.0.0
-  description: 'API LingoGo (Tourism Language Assistance) — frasa, terjemahan, pelafalan & audio.
+  description: 'API LingoGo (Tourism Language Assistance) — cari kota di Indonesia, bahasa daerahnya,
+    frasa, pelafalan & arti.
 
 
     **Autentikasi**
@@ -18,41 +19,11 @@ tags:
 - name: system
 - name: auth
 - name: users
-- name: destination-language
+- name: region
+- name: language
 - name: phrasebook
-- name: pronunciation
 - name: admin
 paths:
-  /audio/{lang}/{key}.mp3:
-    get:
-      tags:
-      - pronunciation
-      summary: File audio pengucapan (MP3, statis, tanpa auth)
-      description: Gunakan `target.audio_url` dari respons frasa; path ini untuk referensi.
-      security: []
-      parameters:
-      - name: lang
-        in: path
-        required: true
-        schema:
-          type: string
-        example: de_DE
-      - name: key
-        in: path
-        required: true
-        schema:
-          type: string
-        example: greet_hello
-      responses:
-        '200':
-          description: audio/mpeg
-          content:
-            audio/mpeg:
-              schema:
-                type: string
-                format: binary
-        '404':
-          description: Audio belum tersedia
   /auth/login:
     post:
       tags:
@@ -165,16 +136,52 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
-  /destinations:
+  /cities:
     get:
       tags:
-      - destination-language
-      summary: Daftar destinasi + kode bahasanya
-      operationId: list_destinations_destinations_get
+      - region
+      summary: Cari kota/kabupaten (q) atau daftar semua
+      description: 'Dengan `q`: cocok jika nama mengandung teks (tidak peka huruf besar/aksen; awalan
+        ''Kota''/''Kab.'' boleh dipakai). Jika tidak ada yang cocok -> **404** dengan pesan ''Maaf, kota
+        yang Anda cari tidak ada di database.'' (sesuai `ui`). Tanpa `q` = daftar berhalaman.'
+      operationId: search_cities_cities_get
       security:
       - APIKeyHeader: []
       - HTTPBearer: []
       parameters:
+      - name: q
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            minLength: 1
+            maxLength: 60
+          - type: 'null'
+          description: Teks pencarian, mis. 'surabaya'
+          title: Q
+        description: Teks pencarian, mis. 'surabaya'
+      - name: province
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Filter kode provinsi, mis. 35
+          title: Province
+        description: Filter kode provinsi, mis. 35
+      - name: type
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - enum:
+            - kota
+            - kabupaten
+            type: string
+          - type: 'null'
+          title: Type
       - name: ui
         in: query
         required: false
@@ -185,28 +192,42 @@ paths:
           type: string
           default: en
           title: Ui
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 100
+          minimum: 1
+          default: 20
+          title: Limit
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+          title: Offset
       responses:
         '200':
           description: Successful Response
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Destination'
-                title: Response List Destinations Destinations Get
+                $ref: '#/components/schemas/CityList'
         '422':
           description: Validation Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
-  /destinations/{code}/emergency-numbers:
+  /cities/{code}:
     get:
       tags:
-      - destination-language
-      summary: Nomor darurat satu destinasi
-      operationId: destination_emergency_destinations__code__emergency_numbers_get
+      - region
+      summary: 'Detail satu kota: provinsi + bahasa daerahnya'
+      operationId: get_city_cities__code__get
       security:
       - APIKeyHeader: []
       - HTTPBearer: []
@@ -233,19 +254,21 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DestinationEmergency'
+                $ref: '#/components/schemas/City'
         '422':
           description: Validation Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
-  /destinations/{code}/languages:
+  /cities/{code}/phrasebook:
     get:
       tags:
-      - destination-language
-      summary: Bahasa yang dipakai di suatu destinasi
-      operationId: destination_languages_destinations__code__languages_get
+      - phrasebook
+      summary: 'Alur utama: kota -> frasa per kategori dalam bahasa daerahnya'
+      description: '`lang` opsional; kosong = bahasa utama kota. Untuk kota berbahasa ganda, `available_languages`
+        berisi pilihan lainnya.'
+      operationId: city_phrasebook_cities__code__phrasebook_get
       security:
       - APIKeyHeader: []
       - HTTPBearer: []
@@ -256,6 +279,16 @@ paths:
         schema:
           type: string
           title: Code
+      - name: lang
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Salah satu bahasa kota ini
+          title: Lang
+        description: Salah satu bahasa kota ini
       - name: ui
         in: query
         required: false
@@ -266,16 +299,26 @@ paths:
           type: string
           default: en
           title: Ui
+      - name: pron
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - enum:
+            - en
+            - id
+            type: string
+          - type: 'null'
+          description: Default = ui
+          title: Pron
+        description: Default = ui
       responses:
         '200':
           description: Successful Response
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Language'
-                title: Response Destination Languages Destinations  Code  Languages Get
+                $ref: '#/components/schemas/CityPhrasebook'
         '422':
           description: Validation Error
           content:
@@ -285,9 +328,9 @@ paths:
   /emergency-numbers:
     get:
       tags:
-      - destination-language
-      summary: Nomor darurat (polisi, damkar, ambulans) semua destinasi
-      operationId: list_emergency_emergency_numbers_get
+      - region
+      summary: Nomor darurat nasional (polisi, damkar, ambulans, SAR, 112)
+      operationId: emergency_numbers_emergency_numbers_get
       security:
       - APIKeyHeader: []
       - HTTPBearer: []
@@ -310,8 +353,8 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/DestinationEmergency'
-                title: Response List Emergency Emergency Numbers Get
+                  $ref: '#/components/schemas/EmergencyNumber'
+                title: Response Emergency Numbers Emergency Numbers Get
         '422':
           description: Validation Error
           content:
@@ -356,8 +399,8 @@ paths:
   /languages:
     get:
       tags:
-      - destination-language
-      summary: Daftar bahasa
+      - language
+      summary: Daftar bahasa daerah
       operationId: list_languages_languages_get
       security:
       - APIKeyHeader: []
@@ -392,7 +435,7 @@ paths:
   /languages/{code}:
     get:
       tags:
-      - destination-language
+      - language
       summary: Detail satu bahasa
       operationId: get_language_languages__code__get
       security:
@@ -428,11 +471,63 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
+  /languages/{code}/phrasebook:
+    get:
+      tags:
+      - phrasebook
+      summary: Seluruh frasa satu bahasa, dikelompokkan per kategori
+      operationId: language_phrasebook_languages__code__phrasebook_get
+      security:
+      - APIKeyHeader: []
+      - HTTPBearer: []
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Code
+      - name: ui
+        in: query
+        required: false
+        schema:
+          enum:
+          - en
+          - id
+          type: string
+          default: en
+          title: Ui
+      - name: pron
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - enum:
+            - en
+            - id
+            type: string
+          - type: 'null'
+          description: Default = ui
+          title: Pron
+        description: Default = ui
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Phrasebook'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
   /phrases:
     get:
       tags:
       - phrasebook
-      summary: Daftar frasa dalam bahasa tujuan
+      summary: Daftar frasa (datar, berhalaman) dalam satu bahasa daerah
       operationId: list_phrases_phrases_get
       security:
       - APIKeyHeader: []
@@ -443,19 +538,10 @@ paths:
         required: true
         schema:
           type: string
-          description: Kode bahasa tujuan, mis. ja_JP / fr_FR
+          description: Kode bahasa daerah, mis. jv_ID
           title: Lang
-        description: Kode bahasa tujuan, mis. ja_JP / fr_FR
-      - name: from
-        in: query
-        required: false
-        schema:
-          type: string
-          description: 'Bahasa antarmuka: en | id'
-          default: en
-          title: From
-        description: 'Bahasa antarmuka: en | id'
-      - name: pron
+        description: Kode bahasa daerah, mis. jv_ID
+      - name: ui
         in: query
         required: false
         schema:
@@ -463,10 +549,21 @@ paths:
           - en
           - id
           type: string
-          description: Panduan pelafalan untuk pembicara en | id
           default: en
+          title: Ui
+      - name: pron
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - enum:
+            - en
+            - id
+            type: string
+          - type: 'null'
+          description: Gaya pelafalan, default = ui
           title: Pron
-        description: Panduan pelafalan untuk pembicara en | id
+        description: Gaya pelafalan, default = ui
       - name: category
         in: query
         required: false
@@ -486,9 +583,9 @@ paths:
             minLength: 1
             maxLength: 50
           - type: 'null'
-          description: Cari di teks sumber/tujuan
+          description: Cari di istilah daerah / arti
           title: Q
-        description: Cari di teks sumber/tujuan
+        description: Cari di istilah daerah / arti
       - name: limit
         in: query
         required: false
@@ -523,7 +620,7 @@ paths:
     get:
       tags:
       - phrasebook
-      summary: Satu frasa dalam bahasa tujuan
+      summary: Satu frasa
       operationId: get_phrase_phrases__key__get
       security:
       - APIKeyHeader: []
@@ -540,17 +637,10 @@ paths:
         required: true
         schema:
           type: string
-          description: Kode bahasa tujuan
+          description: Kode bahasa daerah
           title: Lang
-        description: Kode bahasa tujuan
-      - name: from
-        in: query
-        required: false
-        schema:
-          type: string
-          default: en
-          title: From
-      - name: pron
+        description: Kode bahasa daerah
+      - name: ui
         in: query
         required: false
         schema:
@@ -559,7 +649,20 @@ paths:
           - id
           type: string
           default: en
+          title: Ui
+      - name: pron
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - enum:
+            - en
+            - id
+            type: string
+          - type: 'null'
+          description: Default = ui
           title: Pron
+        description: Default = ui
       responses:
         '200':
           description: Successful Response
@@ -614,6 +717,137 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
+  /provinces:
+    get:
+      tags:
+      - region
+      summary: Daftar provinsi + bahasa daerahnya
+      operationId: list_provinces_provinces_get
+      security:
+      - APIKeyHeader: []
+      - HTTPBearer: []
+      parameters:
+      - name: ui
+        in: query
+        required: false
+        schema:
+          enum:
+          - en
+          - id
+          type: string
+          default: en
+          title: Ui
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Province'
+                title: Response List Provinces Provinces Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /provinces/{code}:
+    get:
+      tags:
+      - region
+      summary: Detail satu provinsi
+      operationId: get_province_provinces__code__get
+      security:
+      - APIKeyHeader: []
+      - HTTPBearer: []
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Code
+      - name: ui
+        in: query
+        required: false
+        schema:
+          enum:
+          - en
+          - id
+          type: string
+          default: en
+          title: Ui
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Province'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /provinces/{code}/cities:
+    get:
+      tags:
+      - region
+      summary: Kota/kabupaten di satu provinsi
+      operationId: province_cities_provinces__code__cities_get
+      security:
+      - APIKeyHeader: []
+      - HTTPBearer: []
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Code
+      - name: ui
+        in: query
+        required: false
+        schema:
+          enum:
+          - en
+          - id
+          type: string
+          default: en
+          title: Ui
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 100
+          minimum: 1
+          default: 100
+          title: Limit
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+          title: Offset
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CityList'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
   /users/me/preferences:
     get:
       tags:
@@ -632,7 +866,7 @@ paths:
     patch:
       tags:
       - users
-      summary: Ubah preferensi (bahasa UI, gaya pelafalan, bahasa tujuan, destinasi)
+      summary: Ubah preferensi (bahasa UI, gaya pelafalan, bahasa daerah, kota)
       operationId: update_prefs_users_me_preferences_patch
       requestBody:
         content:
@@ -687,67 +921,104 @@ components:
       - code
       - name
       title: CategoryRef
-    Destination:
+    City:
       properties:
         code:
           type: string
           title: Code
+          examples:
+          - '3578'
         name:
           type: string
           title: Name
+          examples:
+          - Surabaya
+        type:
+          type: string
+          title: Type
+          description: kota | kabupaten
+        province:
+          $ref: '#/components/schemas/ProvinceRef'
         languages:
           items:
-            type: string
+            $ref: '#/components/schemas/Language'
           type: array
           title: Languages
+          description: Bahasa daerah kota; yang pertama = utama
       type: object
       required:
       - code
       - name
+      - type
+      - province
       - languages
-      title: Destination
-    DestinationEmergency:
+      title: City
+    CityList:
       properties:
-        destination:
+        items:
+          items:
+            $ref: '#/components/schemas/City'
+          type: array
+          title: Items
+        total:
+          type: integer
+          title: Total
+        limit:
+          type: integer
+          title: Limit
+        offset:
+          type: integer
+          title: Offset
+      type: object
+      required:
+      - items
+      - total
+      - limit
+      - offset
+      title: CityList
+    CityPhrasebook:
+      properties:
+        language:
+          $ref: '#/components/schemas/Language'
+        categories:
+          items:
+            $ref: '#/components/schemas/PhrasebookCategory'
+          type: array
+          title: Categories
+        city:
+          $ref: '#/components/schemas/City'
+        available_languages:
+          items:
+            $ref: '#/components/schemas/Language'
+          type: array
+          title: Available Languages
+          description: Semua bahasa kota ini (untuk pilihan ganti bahasa)
+      type: object
+      required:
+      - language
+      - categories
+      - city
+      - available_languages
+      title: CityPhrasebook
+    EmergencyNumber:
+      properties:
+        service:
           type: string
-          title: Destination
+          title: Service
           examples:
-          - DE
+          - police
         name:
           type: string
           title: Name
-        available:
-          type: boolean
-          title: Available
-          description: False jika data nomor darurat negara ini belum ada
-        numbers:
-          $ref: '#/components/schemas/EmergencyNumbers'
+        number:
+          type: string
+          title: Number
       type: object
       required:
-      - destination
+      - service
       - name
-      - available
-      - numbers
-      title: DestinationEmergency
-    EmergencyNumbers:
-      properties:
-        police:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Police
-        fire:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Fire
-        ambulance:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Ambulance
-      type: object
-      title: EmergencyNumbers
+      - number
+      title: EmergencyNumber
     HTTPValidationError:
       properties:
         detail:
@@ -763,31 +1034,69 @@ components:
           type: string
           title: Code
           examples:
-          - ja_JP
+          - jv_ID
         name:
           type: string
           title: Name
+          description: Nama bahasa dalam bahasa antarmuka (ui)
         native_name:
           type: string
           title: Native Name
-        country_code:
+        is_approximate:
+          type: boolean
+          title: Is Approximate
+          description: True = belum ada data asli, isinya memakai bahasa terdekat
+        closest_code:
           type: string
-          title: Country Code
+          title: Closest Code
+          description: Kode bahasa terdekat; sama dengan code jika data asli
         phrase_count:
           type: integer
           title: Phrase Count
-        audio_count:
-          type: integer
-          title: Audio Count
       type: object
       required:
       - code
       - name
       - native_name
-      - country_code
+      - is_approximate
+      - closest_code
       - phrase_count
-      - audio_count
       title: Language
+    Meaning:
+      properties:
+        lang:
+          type: string
+          title: Lang
+          description: '''id'' atau ''en'''
+        text:
+          type: string
+          title: Text
+      type: object
+      required:
+      - lang
+      - text
+      title: Meaning
+    PhraseCard:
+      properties:
+        key:
+          type: string
+          title: Key
+        text:
+          type: string
+          title: Text
+          description: Istilah dalam bahasa daerah
+        pronunciation:
+          $ref: '#/components/schemas/Pronunciation'
+        meaning:
+          $ref: '#/components/schemas/Meaning'
+      type: object
+      required:
+      - key
+      - text
+      - pronunciation
+      - meaning
+      title: PhraseCard
+      description: 'Satu kartu: istilah daerah (tebal, besar), pelafalan (kecil), arti (sedang).'
     PhraseList:
       properties:
         items:
@@ -816,19 +1125,65 @@ components:
         key:
           type: string
           title: Key
+        text:
+          type: string
+          title: Text
+          description: Istilah dalam bahasa daerah
+        pronunciation:
+          $ref: '#/components/schemas/Pronunciation'
+        meaning:
+          $ref: '#/components/schemas/Meaning'
+        lang:
+          type: string
+          title: Lang
         category:
           $ref: '#/components/schemas/CategoryRef'
-        source:
-          $ref: '#/components/schemas/SourceText'
-        target:
-          $ref: '#/components/schemas/TargetText'
       type: object
       required:
       - key
+      - text
+      - pronunciation
+      - meaning
+      - lang
       - category
-      - source
-      - target
       title: PhraseOut
+    Phrasebook:
+      properties:
+        language:
+          $ref: '#/components/schemas/Language'
+        categories:
+          items:
+            $ref: '#/components/schemas/PhrasebookCategory'
+          type: array
+          title: Categories
+      type: object
+      required:
+      - language
+      - categories
+      title: Phrasebook
+    PhrasebookCategory:
+      properties:
+        code:
+          type: string
+          title: Code
+        name:
+          type: string
+          title: Name
+        phrase_count:
+          type: integer
+          title: Phrase Count
+        phrases:
+          items:
+            $ref: '#/components/schemas/PhraseCard'
+          type: array
+          title: Phrases
+      type: object
+      required:
+      - code
+      - name
+      - phrase_count
+      - phrases
+      title: PhrasebookCategory
     Pronunciation:
       properties:
         style:
@@ -843,41 +1198,43 @@ components:
       - style
       - guide
       title: Pronunciation
-    SourceText:
+    Province:
       properties:
-        lang:
+        code:
           type: string
-          title: Lang
-        text:
+          title: Code
+          examples:
+          - '35'
+        name:
           type: string
-          title: Text
+          title: Name
+        languages:
+          items:
+            $ref: '#/components/schemas/Language'
+          type: array
+          title: Languages
+          description: Bahasa daerah provinsi; yang pertama = utama
       type: object
       required:
-      - lang
-      - text
-      title: SourceText
-    TargetText:
+      - code
+      - name
+      - languages
+      title: Province
+    ProvinceRef:
       properties:
-        lang:
+        code:
           type: string
-          title: Lang
-        text:
+          title: Code
+          examples:
+          - '35'
+        name:
           type: string
-          title: Text
-        pronunciation:
-          $ref: '#/components/schemas/Pronunciation'
-        audio_url:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Audio Url
+          title: Name
       type: object
       required:
-      - lang
-      - text
-      - pronunciation
-      - audio_url
-      title: TargetText
+      - code
+      - name
+      title: ProvinceRef
     TranslationUpdate:
       properties:
         text:
@@ -918,11 +1275,6 @@ components:
         type:
           type: string
           title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
       type: object
       required:
       - loc
@@ -964,15 +1316,17 @@ components:
           - type: string
           - type: 'null'
           title: Target Language
+          description: Bahasa daerah terakhir dipakai
           examples:
-          - ja_JP
-        default_destination:
+          - jv_ID
+        default_city:
           anyOf:
           - type: string
           - type: 'null'
-          title: Default Destination
+          title: Default City
+          description: Kode kota favorit/terakhir (4 digit)
           examples:
-          - JP
+          - '3578'
       type: object
       title: Preferences
     PreferencesUpdate:
@@ -999,11 +1353,11 @@ components:
           - type: 'null'
           title: Target Language
           description: Kosongkan string '' untuk menghapus
-        default_destination:
+        default_city:
           anyOf:
           - type: string
           - type: 'null'
-          title: Default Destination
+          title: Default City
           description: Kosongkan string '' untuk menghapus
       type: object
       title: PreferencesUpdate

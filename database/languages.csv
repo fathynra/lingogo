@@ -1,5 +1,29 @@
-code,name_id,name_en,native_name,closest_code,status
-jv_ID,Jawa,Javanese,Basa Jawa,jv_ID,native
-su_ID,Sunda,Sundanese,Basa Sunda,su_ID,native
-ban_ID,Bali,Balinese,Basa Bali,ban_ID,native
-osi_ID,Osing,Osing,Using,jv_ID,approximate
+code,name_id,name_en,native_name,closest_code
+jv_ID,Jawa,Javanese,Basa Jawa,jv_ID
+su_ID,Sunda,Sundanese,Basa Sunda,su_ID
+ban_ID,Bali,Balinese,Basa Bali,ban_ID
+ace_ID,Aceh,Acehnese,Bahsa Acèh,ace_ID
+bbc_ID,Batak Toba,Toba Batak,Hata Batak,bbc_ID
+min_ID,Minangkabau,Minangkabau,Baso Minang,min_ID
+ms_ID,Melayu,Malay,Bahase Melayu,ms_ID
+bew_ID,Betawi,Betawi,Basa Betawi,bew_ID
+mad_ID,Madura,Madurese,Bhâsa Madhurâ,mad_ID
+bug_ID,Bugis,Buginese,Basa Ugi,bug_ID
+bjn_ID,Banjar,Banjarese,Bahasa Banjar,bjn_ID
+xmm_ID,Melayu Manado,Manado Malay,Bahasa Manado,xmm_ID
+abs_ID,Melayu Ambon,Ambonese Malay,Bahasa Ambon,abs_ID
+pmy_ID,Melayu Papua,Papuan Malay,Bahasa Papua,pmy_ID
+osi_ID,Osing,Osing,Using,jv_ID
+plm_ID,Palembang,Palembang,Baso Pelembang,ms_ID
+ljp_ID,Lampung,Lampung,Cawa Lampung,ms_ID
+sas_ID,Sasak,Sasak,Base Sasak,ban_ID
+smw_ID,Sumbawa,Sumbawa,Basa Samawa,ban_ID
+bhp_ID,Bima,Bima,Nggahi Mbojo,ban_ID
+mkn_ID,Melayu Kupang,Kupang Malay,Bahasa Kupang,abs_ID
+mak_ID,Makassar,Makassarese,Basa Mangkasara',bug_ID
+mdr_ID,Mandar,Mandar,Basa Mandar,bug_ID
+sda_ID,Toraja,Toraja,Basa Toraya,bug_ID
+lbw_ID,Tolaki,Tolaki,Bahasa Tolaki,bug_ID
+gor_ID,Gorontalo,Gorontalo,Bahasa Hulontalo,xmm_ID
+kli_ID,Kaili,Kaili,Basa Kaili,xmm_ID
+max_ID,Melayu Maluku Utara,North Moluccan Malay,Bahasa Ternate,abs_ID

@@ -1,9 +1,4 @@
-"""Query ke SQLite -> objek schemas. Murni Python (tanpa FastAPI) supaya mudah diuji.
-
-Konvensi parameter:
-  ui   : 'en' | 'id'  bahasa antarmuka: nama kategori/provinsi/bahasa & ARTI frasa
-  pron : 'en' | 'id'  gaya panduan pelafalan (default mengikuti ui)
-"""
+"""Query SQLite. ui = bahasa antarmuka & arti (en/id), pron = gaya pelafalan (en/id)."""
 from . import schemas
 from .textutil import split_query
 
@@ -14,7 +9,7 @@ NOT_FOUND_CITY = {
 
 
 class NotFound(Exception):
-    """Dipetakan ke HTTP 404 oleh main.py."""
+    pass
 
 
 def _n(row, ui, base="name"):
@@ -86,9 +81,8 @@ def get_city(con, code, ui) -> schemas.City:
 
 
 def search_cities(con, ui, q=None, province=None, type=None, limit=20, offset=0) -> schemas.CityList:
-    """Cari kota/kabupaten. Tanpa q = daftar (bisa difilter provinsi/type).
-    Dengan q: cocok jika nama MENGANDUNG teks (tanpa huruf besar/aksen). Awalan 'Kota'/'Kab.' di q dipahami.
-    q tidak ketemu sama sekali -> NotFound('Maaf, kota yang Anda cari tidak ada di database.')."""
+    """Tanpa q: daftar kota. Dengan q: nama mengandung q (awalan 'Kota'/'Kab.' boleh).
+    Tidak ada yang cocok -> NotFound dengan pesan maaf."""
     conds, params = [], {}
     order = "c.name_norm, c.type, c.code"
     if q is not None:
@@ -179,7 +173,7 @@ def get_phrase(con, key, lang, ui, pron) -> schemas.PhraseOut:
 
 
 def phrasebook(con, lang, ui, pron) -> schemas.Phrasebook:
-    """Seluruh frasa satu bahasa, dikelompokkan per kategori (untuk daftar kategori yang bisa di-expand)."""
+    """Semua frasa satu bahasa, dikelompokkan per kategori."""
     language = get_language(con, lang, ui)
     rows = con.execute(_PHRASE_SQL + _PHRASE_ORDER, {"lang": lang, "pron": pron}).fetchall()
     cats = {c.code: schemas.PhrasebookCategory(**c.model_dump(), phrases=[]) for c in list_categories(con, ui)}
@@ -189,8 +183,7 @@ def phrasebook(con, lang, ui, pron) -> schemas.Phrasebook:
 
 
 def city_phrasebook(con, city_code, lang, ui, pron) -> schemas.CityPhrasebook:
-    """Alur utama aplikasi: kota -> bahasa daerahnya -> kategori + kartu frasa.
-    lang kosong = bahasa utama kota (urutan pertama di cities.csv)."""
+    """Kota -> bahasa daerahnya -> kategori + kartu frasa. lang kosong = bahasa utama kota."""
     city = get_city(con, city_code, ui)
     if lang is None:
         lang = city.languages[0].code

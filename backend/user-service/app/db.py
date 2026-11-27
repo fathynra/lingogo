@@ -32,13 +32,6 @@ def connect() -> sqlite3.Connection:
 
 def init_schema(con):
     con.executescript(SCHEMA)
-    # Migrasi database lama: kolom default_destination (versi dunia) -> default_city (kode kota)
-    cols = {r[1] for r in con.execute("PRAGMA table_info(users)")}
-    if "default_city" not in cols:
-        con.execute("ALTER TABLE users ADD COLUMN default_city TEXT")
-    if "default_destination" in cols:          # sekali jalan: kolom lama dibuang, bahasa lama (kode dunia) direset
-        con.execute("UPDATE users SET target_language=NULL")
-        con.execute("ALTER TABLE users DROP COLUMN default_destination")   # SQLite >= 3.35
     con.commit()
 
 

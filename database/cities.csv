@@ -1,18 +1,515 @@
 code,name,type,province_code,languages
+1101,Aceh Selatan,kabupaten,11,ace_ID
+1102,Aceh Tenggara,kabupaten,11,ace_ID
+1103,Aceh Timur,kabupaten,11,ace_ID
+1104,Aceh Tengah,kabupaten,11,ace_ID
+1105,Aceh Barat,kabupaten,11,ace_ID
+1106,Aceh Besar,kabupaten,11,ace_ID
+1107,Pidie,kabupaten,11,ace_ID
+1108,Aceh Utara,kabupaten,11,ace_ID
+1109,Simeulue,kabupaten,11,ace_ID
+1110,Aceh Singkil,kabupaten,11,ace_ID
+1111,Bireuen,kabupaten,11,ace_ID
+1112,Aceh Barat Daya,kabupaten,11,ace_ID
+1113,Gayo Lues,kabupaten,11,ace_ID
+1114,Aceh Jaya,kabupaten,11,ace_ID
+1115,Nagan Raya,kabupaten,11,ace_ID
+1116,Aceh Tamiang,kabupaten,11,ace_ID
+1117,Bener Meriah,kabupaten,11,ace_ID
+1118,Pidie Jaya,kabupaten,11,ace_ID
+1171,Banda Aceh,kota,11,ace_ID
+1172,Sabang,kota,11,ace_ID
+1173,Lhokseumawe,kota,11,ace_ID
+1174,Langsa,kota,11,ace_ID
+1175,Subulussalam,kota,11,ace_ID
+1201,Tapanuli Tengah,kabupaten,12,bbc_ID
+1202,Tapanuli Utara,kabupaten,12,bbc_ID
+1203,Tapanuli Selatan,kabupaten,12,bbc_ID
+1204,Nias,kabupaten,12,bbc_ID
+1205,Langkat,kabupaten,12,bbc_ID
+1206,Karo,kabupaten,12,bbc_ID
+1207,Deli Serdang,kabupaten,12,bbc_ID
+1208,Simalungun,kabupaten,12,bbc_ID
+1209,Asahan,kabupaten,12,bbc_ID
+1210,Labuhanbatu,kabupaten,12,bbc_ID
+1211,Dairi,kabupaten,12,bbc_ID
+1212,Toba,kabupaten,12,bbc_ID
+1213,Mandailing Natal,kabupaten,12,bbc_ID
+1214,Nias Selatan,kabupaten,12,bbc_ID
+1215,Pakpak Bharat,kabupaten,12,bbc_ID
+1216,Humbang Hasundutan,kabupaten,12,bbc_ID
+1217,Samosir,kabupaten,12,bbc_ID
+1218,Serdang Bedagai,kabupaten,12,bbc_ID
+1219,Batu Bara,kabupaten,12,bbc_ID
+1220,Padang Lawas Utara,kabupaten,12,bbc_ID
+1221,Padang Lawas,kabupaten,12,bbc_ID
+1222,Labuhanbatu Selatan,kabupaten,12,bbc_ID
+1223,Labuhanbatu Utara,kabupaten,12,bbc_ID
+1224,Nias Utara,kabupaten,12,bbc_ID
+1225,Nias Barat,kabupaten,12,bbc_ID
+1271,Medan,kota,12,bbc_ID;ms_ID
+1272,Pematangsiantar,kota,12,bbc_ID
+1273,Sibolga,kota,12,bbc_ID
+1274,Tanjungbalai,kota,12,bbc_ID
+1275,Binjai,kota,12,bbc_ID
+1276,Tebing Tinggi,kota,12,bbc_ID
+1277,Padangsidimpuan,kota,12,bbc_ID
+1278,Gunungsitoli,kota,12,bbc_ID
+1301,Pesisir Selatan,kabupaten,13,min_ID
+1302,Solok,kabupaten,13,min_ID
+1303,Sijunjung,kabupaten,13,min_ID
+1304,Tanah Datar,kabupaten,13,min_ID
+1305,Padang Pariaman,kabupaten,13,min_ID
+1306,Agam,kabupaten,13,min_ID
+1307,Lima Puluh Kota,kabupaten,13,min_ID
+1308,Pasaman,kabupaten,13,min_ID
+1309,Kepulauan Mentawai,kabupaten,13,min_ID
+1310,Dharmasraya,kabupaten,13,min_ID
+1311,Solok Selatan,kabupaten,13,min_ID
+1312,Pasaman Barat,kabupaten,13,min_ID
+1371,Padang,kota,13,min_ID
+1372,Solok,kota,13,min_ID
+1373,Sawahlunto,kota,13,min_ID
+1374,Padang Panjang,kota,13,min_ID
+1375,Bukittinggi,kota,13,min_ID
+1376,Payakumbuh,kota,13,min_ID
+1377,Pariaman,kota,13,min_ID
+1401,Kampar,kabupaten,14,ms_ID
+1402,Indragiri Hulu,kabupaten,14,ms_ID
+1403,Bengkalis,kabupaten,14,ms_ID
+1404,Indragiri Hilir,kabupaten,14,ms_ID
+1405,Pelalawan,kabupaten,14,ms_ID
+1406,Rokan Hulu,kabupaten,14,ms_ID
+1407,Rokan Hilir,kabupaten,14,ms_ID
+1408,Siak,kabupaten,14,ms_ID
+1409,Kuantan Singingi,kabupaten,14,ms_ID
+1410,Kepulauan Meranti,kabupaten,14,ms_ID
+1471,Pekanbaru,kota,14,ms_ID
+1472,Dumai,kota,14,ms_ID
+1501,Kerinci,kabupaten,15,ms_ID
+1502,Merangin,kabupaten,15,ms_ID
+1503,Sarolangun,kabupaten,15,ms_ID
+1504,Batanghari,kabupaten,15,ms_ID
+1505,Muaro Jambi,kabupaten,15,ms_ID
+1506,Tanjung Jabung Barat,kabupaten,15,ms_ID
+1507,Tanjung Jabung Timur,kabupaten,15,ms_ID
+1508,Bungo,kabupaten,15,ms_ID
+1509,Tebo,kabupaten,15,ms_ID
+1571,Jambi,kota,15,ms_ID
+1572,Sungai Penuh,kota,15,ms_ID
+1601,Ogan Komering Ulu,kabupaten,16,plm_ID
+1602,Ogan Komering Ilir,kabupaten,16,plm_ID
+1603,Muara Enim,kabupaten,16,plm_ID
+1604,Lahat,kabupaten,16,plm_ID
+1605,Musi Rawas,kabupaten,16,plm_ID
+1606,Musi Banyuasin,kabupaten,16,plm_ID
+1607,Banyuasin,kabupaten,16,plm_ID
+1608,Ogan Komering Ulu Timur,kabupaten,16,plm_ID
+1609,Ogan Komering Ulu Selatan,kabupaten,16,plm_ID
+1610,Ogan Ilir,kabupaten,16,plm_ID
+1611,Empat Lawang,kabupaten,16,plm_ID
+1612,Penukal Abab Lematang Ilir,kabupaten,16,plm_ID
+1613,Musi Rawas Utara,kabupaten,16,plm_ID
+1671,Palembang,kota,16,plm_ID
+1672,Pagar Alam,kota,16,plm_ID
+1673,Lubuk Linggau,kota,16,plm_ID
+1674,Prabumulih,kota,16,plm_ID
+1701,Bengkulu Selatan,kabupaten,17,ms_ID
+1702,Rejang Lebong,kabupaten,17,ms_ID
+1703,Bengkulu Utara,kabupaten,17,ms_ID
+1704,Kaur,kabupaten,17,ms_ID
+1705,Seluma,kabupaten,17,ms_ID
+1706,Mukomuko,kabupaten,17,ms_ID
+1707,Lebong,kabupaten,17,ms_ID
+1708,Kepahiang,kabupaten,17,ms_ID
+1709,Bengkulu Tengah,kabupaten,17,ms_ID
+1771,Bengkulu,kota,17,ms_ID
+1801,Lampung Selatan,kabupaten,18,ljp_ID
+1802,Lampung Tengah,kabupaten,18,ljp_ID
+1803,Lampung Utara,kabupaten,18,ljp_ID
+1804,Lampung Barat,kabupaten,18,ljp_ID
+1805,Tulang Bawang,kabupaten,18,ljp_ID
+1806,Tanggamus,kabupaten,18,ljp_ID
+1807,Lampung Timur,kabupaten,18,ljp_ID
+1808,Way Kanan,kabupaten,18,ljp_ID
+1809,Pesawaran,kabupaten,18,ljp_ID
+1810,Pringsewu,kabupaten,18,ljp_ID
+1811,Mesuji,kabupaten,18,ljp_ID
+1812,Tulang Bawang Barat,kabupaten,18,ljp_ID
+1813,Pesisir Barat,kabupaten,18,ljp_ID
+1871,Bandar Lampung,kota,18,ljp_ID
+1872,Metro,kota,18,ljp_ID
+1901,Bangka,kabupaten,19,ms_ID
+1902,Belitung,kabupaten,19,ms_ID
+1903,Bangka Selatan,kabupaten,19,ms_ID
+1904,Bangka Tengah,kabupaten,19,ms_ID
+1905,Bangka Barat,kabupaten,19,ms_ID
+1906,Belitung Timur,kabupaten,19,ms_ID
+1971,Pangkal Pinang,kota,19,ms_ID
+2101,Bintan,kabupaten,21,ms_ID
+2102,Karimun,kabupaten,21,ms_ID
+2103,Natuna,kabupaten,21,ms_ID
+2104,Lingga,kabupaten,21,ms_ID
+2105,Kepulauan Anambas,kabupaten,21,ms_ID
+2171,Batam,kota,21,ms_ID
+2172,Tanjung Pinang,kota,21,ms_ID
+3101,Kepulauan Seribu,kabupaten,31,bew_ID
+3171,Jakarta Pusat,kota,31,bew_ID
+3172,Jakarta Utara,kota,31,bew_ID
+3173,Jakarta Barat,kota,31,bew_ID
+3174,Jakarta Selatan,kota,31,bew_ID
+3175,Jakarta Timur,kota,31,bew_ID
 3201,Bogor,kabupaten,32,su_ID
+3202,Sukabumi,kabupaten,32,su_ID
+3203,Cianjur,kabupaten,32,su_ID
+3204,Bandung,kabupaten,32,su_ID
+3205,Garut,kabupaten,32,su_ID
+3206,Tasikmalaya,kabupaten,32,su_ID
+3207,Ciamis,kabupaten,32,su_ID
+3208,Kuningan,kabupaten,32,su_ID
+3209,Cirebon,kabupaten,32,jv_ID;su_ID
+3210,Majalengka,kabupaten,32,su_ID
+3211,Sumedang,kabupaten,32,su_ID
+3212,Indramayu,kabupaten,32,jv_ID;su_ID
+3213,Subang,kabupaten,32,su_ID
+3214,Purwakarta,kabupaten,32,su_ID
+3215,Karawang,kabupaten,32,su_ID
+3216,Bekasi,kabupaten,32,su_ID;bew_ID
+3217,Bandung Barat,kabupaten,32,su_ID
+3218,Pangandaran,kabupaten,32,su_ID
 3271,Bogor,kota,32,su_ID
+3272,Sukabumi,kota,32,su_ID
 3273,Bandung,kota,32,su_ID
 3274,Cirebon,kota,32,jv_ID;su_ID
+3275,Bekasi,kota,32,su_ID;bew_ID
+3276,Depok,kota,32,su_ID;bew_ID
+3277,Cimahi,kota,32,su_ID
+3278,Tasikmalaya,kota,32,su_ID
+3279,Banjar,kota,32,su_ID
+3301,Cilacap,kabupaten,33,jv_ID
+3302,Banyumas,kabupaten,33,jv_ID
+3303,Purbalingga,kabupaten,33,jv_ID
+3304,Banjarnegara,kabupaten,33,jv_ID
+3305,Kebumen,kabupaten,33,jv_ID
+3306,Purworejo,kabupaten,33,jv_ID
+3307,Wonosobo,kabupaten,33,jv_ID
+3308,Magelang,kabupaten,33,jv_ID
+3309,Boyolali,kabupaten,33,jv_ID
+3310,Klaten,kabupaten,33,jv_ID
+3311,Sukoharjo,kabupaten,33,jv_ID
+3312,Wonogiri,kabupaten,33,jv_ID
+3313,Karanganyar,kabupaten,33,jv_ID
+3314,Sragen,kabupaten,33,jv_ID
+3315,Grobogan,kabupaten,33,jv_ID
+3316,Blora,kabupaten,33,jv_ID
+3317,Rembang,kabupaten,33,jv_ID
+3318,Pati,kabupaten,33,jv_ID
+3319,Kudus,kabupaten,33,jv_ID
+3320,Jepara,kabupaten,33,jv_ID
+3321,Demak,kabupaten,33,jv_ID
+3322,Semarang,kabupaten,33,jv_ID
+3323,Temanggung,kabupaten,33,jv_ID
+3324,Kendal,kabupaten,33,jv_ID
+3325,Batang,kabupaten,33,jv_ID
+3326,Pekalongan,kabupaten,33,jv_ID
+3327,Pemalang,kabupaten,33,jv_ID
+3328,Tegal,kabupaten,33,jv_ID
+3329,Brebes,kabupaten,33,jv_ID
+3371,Magelang,kota,33,jv_ID
 3372,Surakarta,kota,33,jv_ID
+3373,Salatiga,kota,33,jv_ID
 3374,Semarang,kota,33,jv_ID
+3375,Pekalongan,kota,33,jv_ID
+3376,Tegal,kota,33,jv_ID
+3401,Kulon Progo,kabupaten,34,jv_ID
 3402,Bantul,kabupaten,34,jv_ID
+3403,Gunungkidul,kabupaten,34,jv_ID
 3404,Sleman,kabupaten,34,jv_ID
 3471,Yogyakarta,kota,34,jv_ID
+3501,Pacitan,kabupaten,35,jv_ID
+3502,Ponorogo,kabupaten,35,jv_ID
+3503,Trenggalek,kabupaten,35,jv_ID
+3504,Tulungagung,kabupaten,35,jv_ID
+3505,Blitar,kabupaten,35,jv_ID
+3506,Kediri,kabupaten,35,jv_ID
 3507,Malang,kabupaten,35,jv_ID
+3508,Lumajang,kabupaten,35,jv_ID;mad_ID
+3509,Jember,kabupaten,35,jv_ID;mad_ID
 3510,Banyuwangi,kabupaten,35,osi_ID;jv_ID
+3511,Bondowoso,kabupaten,35,mad_ID;jv_ID
+3512,Situbondo,kabupaten,35,mad_ID;jv_ID
+3513,Probolinggo,kabupaten,35,jv_ID;mad_ID
+3514,Pasuruan,kabupaten,35,jv_ID;mad_ID
+3515,Sidoarjo,kabupaten,35,jv_ID
+3516,Mojokerto,kabupaten,35,jv_ID
+3517,Jombang,kabupaten,35,jv_ID
+3518,Nganjuk,kabupaten,35,jv_ID
+3519,Madiun,kabupaten,35,jv_ID
+3520,Magetan,kabupaten,35,jv_ID
+3521,Ngawi,kabupaten,35,jv_ID
+3522,Bojonegoro,kabupaten,35,jv_ID
+3523,Tuban,kabupaten,35,jv_ID
+3524,Lamongan,kabupaten,35,jv_ID
+3525,Gresik,kabupaten,35,jv_ID
+3526,Bangkalan,kabupaten,35,mad_ID
+3527,Sampang,kabupaten,35,mad_ID
+3528,Pamekasan,kabupaten,35,mad_ID
+3529,Sumenep,kabupaten,35,mad_ID
+3571,Kediri,kota,35,jv_ID
+3572,Blitar,kota,35,jv_ID
 3573,Malang,kota,35,jv_ID
+3574,Probolinggo,kota,35,jv_ID;mad_ID
+3575,Pasuruan,kota,35,jv_ID;mad_ID
+3576,Mojokerto,kota,35,jv_ID
+3577,Madiun,kota,35,jv_ID
 3578,Surabaya,kota,35,jv_ID
-3671,Tangerang,kota,36,su_ID
+3579,Batu,kota,35,jv_ID
+3601,Pandeglang,kabupaten,36,su_ID
+3602,Lebak,kabupaten,36,su_ID
+3603,Tangerang,kabupaten,36,su_ID;bew_ID
+3604,Serang,kabupaten,36,jv_ID;su_ID
+3671,Tangerang,kota,36,su_ID;bew_ID
+3672,Cilegon,kota,36,jv_ID;su_ID
+3673,Serang,kota,36,jv_ID;su_ID
+3674,Tangerang Selatan,kota,36,su_ID;bew_ID
+5101,Jembrana,kabupaten,51,ban_ID
+5102,Tabanan,kabupaten,51,ban_ID
 5103,Badung,kabupaten,51,ban_ID
 5104,Gianyar,kabupaten,51,ban_ID
+5105,Klungkung,kabupaten,51,ban_ID
+5106,Bangli,kabupaten,51,ban_ID
+5107,Karangasem,kabupaten,51,ban_ID
+5108,Buleleng,kabupaten,51,ban_ID
 5171,Denpasar,kota,51,ban_ID
+5201,Lombok Barat,kabupaten,52,sas_ID
+5202,Lombok Tengah,kabupaten,52,sas_ID
+5203,Lombok Timur,kabupaten,52,sas_ID
+5204,Sumbawa,kabupaten,52,smw_ID
+5205,Dompu,kabupaten,52,bhp_ID
+5206,Bima,kabupaten,52,bhp_ID
+5207,Sumbawa Barat,kabupaten,52,smw_ID
+5208,Lombok Utara,kabupaten,52,sas_ID
+5271,Mataram,kota,52,sas_ID
+5272,Bima,kota,52,bhp_ID
+5301,Kupang,kabupaten,53,mkn_ID
+5302,Timor Tengah Selatan,kabupaten,53,mkn_ID
+5303,Timor Tengah Utara,kabupaten,53,mkn_ID
+5304,Belu,kabupaten,53,mkn_ID
+5305,Alor,kabupaten,53,mkn_ID
+5306,Flores Timur,kabupaten,53,mkn_ID
+5307,Sikka,kabupaten,53,mkn_ID
+5308,Ende,kabupaten,53,mkn_ID
+5309,Ngada,kabupaten,53,mkn_ID
+5310,Manggarai,kabupaten,53,mkn_ID
+5311,Sumba Timur,kabupaten,53,mkn_ID
+5312,Sumba Barat,kabupaten,53,mkn_ID
+5313,Lembata,kabupaten,53,mkn_ID
+5314,Rote Ndao,kabupaten,53,mkn_ID
+5315,Manggarai Barat,kabupaten,53,mkn_ID
+5316,Nagekeo,kabupaten,53,mkn_ID
+5317,Sumba Tengah,kabupaten,53,mkn_ID
+5318,Sumba Barat Daya,kabupaten,53,mkn_ID
+5319,Manggarai Timur,kabupaten,53,mkn_ID
+5320,Sabu Raijua,kabupaten,53,mkn_ID
+5321,Malaka,kabupaten,53,mkn_ID
+5371,Kupang,kota,53,mkn_ID
+6101,Sambas,kabupaten,61,ms_ID
+6102,Mempawah,kabupaten,61,ms_ID
+6103,Sanggau,kabupaten,61,ms_ID
+6104,Ketapang,kabupaten,61,ms_ID
+6105,Sintang,kabupaten,61,ms_ID
+6106,Kapuas Hulu,kabupaten,61,ms_ID
+6107,Bengkayang,kabupaten,61,ms_ID
+6108,Landak,kabupaten,61,ms_ID
+6109,Sekadau,kabupaten,61,ms_ID
+6110,Melawi,kabupaten,61,ms_ID
+6111,Kayong Utara,kabupaten,61,ms_ID
+6112,Kubu Raya,kabupaten,61,ms_ID
+6171,Pontianak,kota,61,ms_ID
+6172,Singkawang,kota,61,ms_ID
+6201,Kotawaringin Barat,kabupaten,62,bjn_ID
+6202,Kotawaringin Timur,kabupaten,62,bjn_ID
+6203,Kapuas,kabupaten,62,bjn_ID
+6204,Barito Selatan,kabupaten,62,bjn_ID
+6205,Barito Utara,kabupaten,62,bjn_ID
+6206,Katingan,kabupaten,62,bjn_ID
+6207,Seruyan,kabupaten,62,bjn_ID
+6208,Sukamara,kabupaten,62,bjn_ID
+6209,Lamandau,kabupaten,62,bjn_ID
+6210,Gunung Mas,kabupaten,62,bjn_ID
+6211,Pulang Pisau,kabupaten,62,bjn_ID
+6212,Murung Raya,kabupaten,62,bjn_ID
+6213,Barito Timur,kabupaten,62,bjn_ID
+6271,Palangkaraya,kota,62,bjn_ID
+6301,Tanah Laut,kabupaten,63,bjn_ID
+6302,Kotabaru,kabupaten,63,bjn_ID
+6303,Banjar,kabupaten,63,bjn_ID
+6304,Barito Kuala,kabupaten,63,bjn_ID
+6305,Tapin,kabupaten,63,bjn_ID
+6306,Hulu Sungai Selatan,kabupaten,63,bjn_ID
+6307,Hulu Sungai Tengah,kabupaten,63,bjn_ID
+6308,Hulu Sungai Utara,kabupaten,63,bjn_ID
+6309,Tabalong,kabupaten,63,bjn_ID
+6310,Tanah Bumbu,kabupaten,63,bjn_ID
+6311,Balangan,kabupaten,63,bjn_ID
+6371,Banjarmasin,kota,63,bjn_ID
+6372,Banjarbaru,kota,63,bjn_ID
+6401,Paser,kabupaten,64,bjn_ID
+6402,Kutai Kartanegara,kabupaten,64,bjn_ID
+6403,Berau,kabupaten,64,bjn_ID
+6407,Kutai Barat,kabupaten,64,bjn_ID
+6408,Kutai Timur,kabupaten,64,bjn_ID
+6409,Penajam Paser Utara,kabupaten,64,bjn_ID
+6411,Mahakam Ulu,kabupaten,64,bjn_ID
+6471,Balikpapan,kota,64,bjn_ID
+6472,Samarinda,kota,64,bjn_ID
+6474,Bontang,kota,64,bjn_ID
+6501,Bulungan,kabupaten,65,bjn_ID
+6502,Malinau,kabupaten,65,bjn_ID
+6503,Nunukan,kabupaten,65,bjn_ID
+6504,Tana Tidung,kabupaten,65,bjn_ID
+6571,Tarakan,kota,65,bjn_ID
+7101,Bolaang Mongondow,kabupaten,71,xmm_ID
+7102,Minahasa,kabupaten,71,xmm_ID
+7103,Kepulauan Sangihe,kabupaten,71,xmm_ID
+7104,Kepulauan Talaud,kabupaten,71,xmm_ID
+7105,Minahasa Selatan,kabupaten,71,xmm_ID
+7106,Minahasa Utara,kabupaten,71,xmm_ID
+7107,Minahasa Tenggara,kabupaten,71,xmm_ID
+7108,Bolaang Mongondow Utara,kabupaten,71,xmm_ID
+7109,Kep. Siau Tagulandang Biaro,kabupaten,71,xmm_ID
+7110,Bolaang Mongondow Timur,kabupaten,71,xmm_ID
+7111,Bolaang Mongondow Selatan,kabupaten,71,xmm_ID
+7171,Manado,kota,71,xmm_ID
+7172,Bitung,kota,71,xmm_ID
+7173,Tomohon,kota,71,xmm_ID
+7174,Kotamobagu,kota,71,xmm_ID
+7201,Banggai,kabupaten,72,kli_ID
+7202,Poso,kabupaten,72,kli_ID
+7203,Donggala,kabupaten,72,kli_ID
+7204,Toli-Toli,kabupaten,72,kli_ID
+7205,Buol,kabupaten,72,kli_ID
+7206,Morowali,kabupaten,72,kli_ID
+7207,Banggai Kepulauan,kabupaten,72,kli_ID
+7208,Parigi Moutong,kabupaten,72,kli_ID
+7209,Tojo Una Una,kabupaten,72,kli_ID
+7210,Sigi,kabupaten,72,kli_ID
+7211,Banggai Laut,kabupaten,72,kli_ID
+7212,Morowali Utara,kabupaten,72,kli_ID
+7271,Palu,kota,72,kli_ID
+7301,Kepulauan Selayar,kabupaten,73,mak_ID;bug_ID
+7302,Bulukumba,kabupaten,73,bug_ID
+7303,Bantaeng,kabupaten,73,mak_ID;bug_ID
+7304,Jeneponto,kabupaten,73,mak_ID;bug_ID
+7305,Takalar,kabupaten,73,mak_ID;bug_ID
+7306,Gowa,kabupaten,73,mak_ID;bug_ID
+7307,Sinjai,kabupaten,73,bug_ID
+7308,Bone,kabupaten,73,bug_ID
+7309,Maros,kabupaten,73,mak_ID;bug_ID
+7310,Pangkajene dan Kepulauan,kabupaten,73,mak_ID;bug_ID
+7311,Barru,kabupaten,73,bug_ID
+7312,Soppeng,kabupaten,73,bug_ID
+7313,Wajo,kabupaten,73,bug_ID
+7314,Sidenreng Rappang,kabupaten,73,bug_ID
+7315,Pinrang,kabupaten,73,bug_ID
+7316,Enrekang,kabupaten,73,bug_ID
+7317,Luwu,kabupaten,73,bug_ID
+7318,Tana Toraja,kabupaten,73,sda_ID;bug_ID
+7322,Luwu Utara,kabupaten,73,bug_ID
+7324,Luwu Timur,kabupaten,73,bug_ID
+7326,Toraja Utara,kabupaten,73,sda_ID;bug_ID
+7371,Makassar,kota,73,mak_ID;bug_ID
+7372,Parepare,kota,73,bug_ID
+7373,Palopo,kota,73,bug_ID
+7401,Kolaka,kabupaten,74,lbw_ID
+7402,Konawe,kabupaten,74,lbw_ID
+7403,Muna,kabupaten,74,lbw_ID
+7404,Buton,kabupaten,74,lbw_ID
+7405,Konawe Selatan,kabupaten,74,lbw_ID
+7406,Bombana,kabupaten,74,lbw_ID
+7407,Wakatobi,kabupaten,74,lbw_ID
+7408,Kolaka Utara,kabupaten,74,lbw_ID
+7409,Konawe Utara,kabupaten,74,lbw_ID
+7410,Buton Utara,kabupaten,74,lbw_ID
+7411,Kolaka Timur,kabupaten,74,lbw_ID
+7412,Konawe Kepulauan,kabupaten,74,lbw_ID
+7413,Muna Barat,kabupaten,74,lbw_ID
+7414,Buton Tengah,kabupaten,74,lbw_ID
+7415,Buton Selatan,kabupaten,74,lbw_ID
+7471,Kendari,kota,74,lbw_ID
+7472,Bau Bau,kota,74,lbw_ID
+7501,Gorontalo,kabupaten,75,gor_ID
+7502,Boalemo,kabupaten,75,gor_ID
+7503,Bone Bolango,kabupaten,75,gor_ID
+7504,Pohuwato,kabupaten,75,gor_ID
+7505,Gorontalo Utara,kabupaten,75,gor_ID
+7571,Gorontalo,kota,75,gor_ID
+7601,Pasangkayu,kabupaten,76,mdr_ID
+7602,Mamuju,kabupaten,76,mdr_ID
+7603,Mamasa,kabupaten,76,mdr_ID
+7604,Polewali Mandar,kabupaten,76,mdr_ID
+7605,Majene,kabupaten,76,mdr_ID
+7606,Mamuju Tengah,kabupaten,76,mdr_ID
+8101,Maluku Tengah,kabupaten,81,abs_ID
+8102,Maluku Tenggara,kabupaten,81,abs_ID
+8103,Kepulauan Tanimbar,kabupaten,81,abs_ID
+8104,Buru,kabupaten,81,abs_ID
+8105,Seram Bagian Timur,kabupaten,81,abs_ID
+8106,Seram Bagian Barat,kabupaten,81,abs_ID
+8107,Kepulauan Aru,kabupaten,81,abs_ID
+8108,Maluku Barat Daya,kabupaten,81,abs_ID
+8109,Buru Selatan,kabupaten,81,abs_ID
+8171,Ambon,kota,81,abs_ID
+8172,Tual,kota,81,abs_ID
+8201,Halmahera Barat,kabupaten,82,max_ID
+8202,Halmahera Tengah,kabupaten,82,max_ID
+8203,Halmahera Utara,kabupaten,82,max_ID
+8204,Halmahera Selatan,kabupaten,82,max_ID
+8205,Kepulauan Sula,kabupaten,82,max_ID
+8206,Halmahera Timur,kabupaten,82,max_ID
+8207,Pulau Morotai,kabupaten,82,max_ID
+8208,Pulau Taliabu,kabupaten,82,max_ID
+8271,Ternate,kota,82,max_ID
+8272,Tidore Kepulauan,kota,82,max_ID
+9103,Jayapura,kabupaten,91,pmy_ID
+9105,Kepulauan Yapen,kabupaten,91,pmy_ID
+9106,Biak Numfor,kabupaten,91,pmy_ID
+9110,Sarmi,kabupaten,91,pmy_ID
+9111,Keerom,kabupaten,91,pmy_ID
+9115,Waropen,kabupaten,91,pmy_ID
+9119,Supiori,kabupaten,91,pmy_ID
+9120,Mamberamo Raya,kabupaten,91,pmy_ID
+9171,Jayapura,kota,91,pmy_ID
+9202,Manokwari,kabupaten,92,pmy_ID
+9203,Fak Fak,kabupaten,92,pmy_ID
+9206,Teluk Bintuni,kabupaten,92,pmy_ID
+9207,Teluk Wondama,kabupaten,92,pmy_ID
+9208,Kaimana,kabupaten,92,pmy_ID
+9211,Manokwari Selatan,kabupaten,92,pmy_ID
+9212,Pegunungan Arfak,kabupaten,92,pmy_ID
+9301,Merauke,kabupaten,93,pmy_ID
+9302,Boven Digoel,kabupaten,93,pmy_ID
+9303,Mappi,kabupaten,93,pmy_ID
+9304,Asmat,kabupaten,93,pmy_ID
+9401,Nabire,kabupaten,94,pmy_ID
+9402,Puncak Jaya,kabupaten,94,pmy_ID
+9403,Paniai,kabupaten,94,pmy_ID
+9404,Mimika,kabupaten,94,pmy_ID
+9405,Puncak,kabupaten,94,pmy_ID
+9406,Dogiyai,kabupaten,94,pmy_ID
+9407,Intan Jaya,kabupaten,94,pmy_ID
+9408,Deiyai,kabupaten,94,pmy_ID
+9501,Jayawijaya,kabupaten,95,pmy_ID
+9502,Pegunungan Bintang,kabupaten,95,pmy_ID
+9503,Yahukimo,kabupaten,95,pmy_ID
+9504,Tolikara,kabupaten,95,pmy_ID
+9505,Mamberamo Tengah,kabupaten,95,pmy_ID
+9506,Yalimo,kabupaten,95,pmy_ID
+9507,Lanny Jaya,kabupaten,95,pmy_ID
+9508,Nduga,kabupaten,95,pmy_ID
+9601,Sorong,kabupaten,96,pmy_ID
+9602,Sorong Selatan,kabupaten,96,pmy_ID
+9603,Raja Ampat,kabupaten,96,pmy_ID
+9604,Tambrauw,kabupaten,96,pmy_ID
+9605,Maybrat,kabupaten,96,pmy_ID
+9671,Sorong,kota,96,pmy_ID

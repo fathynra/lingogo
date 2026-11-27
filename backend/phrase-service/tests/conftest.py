@@ -6,41 +6,36 @@ from pathlib import Path
 import jwt
 import pytest
 
-HERE = Path(__file__).resolve().parent
-FIXTURE_DB = HERE / "fixtures" / "database"      # data kecil & tetap khusus tes
-REAL_DB = HERE.parents[2] / "database"           # lingogo/database (data sungguhan)
+DATABASE = Path(__file__).resolve().parents[3] / "database"   # lingogo/database
 SECRET = "test-secret-test-secret-test-secret"
 
 
 @pytest.fixture
-def fixture_copy(tmp_path):
-    """Salinan data tes yang boleh dirusak oleh tes."""
+def db_copy(tmp_path):
+    """Salinan CSV yang boleh diubah oleh tes."""
     dst = tmp_path / "database"
-    shutil.copytree(FIXTURE_DB, dst)
+    shutil.copytree(DATABASE, dst)
     return dst
 
 
 @pytest.fixture(scope="session")
 def con(tmp_path_factory):
-    """Koneksi SQLite yang sudah diisi dari data tes (untuk tes repository)."""
     from app import db, seed
     c = db.connect(tmp_path_factory.mktemp("repo") / "p.db")
-    seed.ensure_seeded(c, FIXTURE_DB)
+    seed.ensure_seeded(c, DATABASE)
     yield c
     c.close()
 
 
 @pytest.fixture(scope="session")
 def client(tmp_path_factory):
-    """Klien HTTP penuh. Dilewati otomatis bila fastapi/httpx belum terpasang."""
-    pytest.importorskip("fastapi")
-    pytest.importorskip("httpx")
     tmp = tmp_path_factory.mktemp("api")
-    os.environ.update(DATABASE_DIR=str(FIXTURE_DB), DB_PATH=str(tmp / "p.db"), JWT_SECRET=SECRET,
-                      API_KEYS="kelompokx:key-x,kelompoky:key-y")
+    os.environ.update(DATABASE_DIR=str(DATABASE), DB_PATH=str(tmp / "p.db"), JWT_SECRET=SECRET,
+                      API_KEYS="kelompokx:key-x")
     from fastapi.testclient import TestClient
     from app import config
     config.JWT_SECRET, config.API_KEYS_RAW = SECRET, os.environ["API_KEYS"]
+    config.DATABASE_DIR, config.DB_PATH = DATABASE, tmp / "p.db"
     from app.main import app
     with TestClient(app) as c:
         yield c

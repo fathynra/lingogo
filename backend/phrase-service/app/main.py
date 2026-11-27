@@ -1,4 +1,3 @@
-"""Lapisan HTTP phrase-service. Isinya hanya routing + validasi parameter; logika ada di repository.py."""
 from contextlib import asynccontextmanager
 from typing import Literal
 
@@ -24,19 +23,16 @@ async def lifespan(app: FastAPI):
 app = FastAPI(
     title="LingoGo Phrase Service",
     version="2.0.0",
-    description=(
-        "Layanan inti LingoGo untuk wisatawan di Indonesia: cari kota -> bahasa daerahnya -> "
-        "kategori frasa -> kartu (istilah daerah, pelafalan Indonesia/Inggris, arti Indonesia/Inggris).\n\n"
-        "`ui` = bahasa antarmuka (nama + arti): `id` | `en`. `pron` = gaya pelafalan `id` | `en` "
-        "(default mengikuti `ui`).\n\n"
-        "**Auth:** `X-API-Key` (kelompok lain) atau `Authorization: Bearer <JWT>` (pengguna aplikasi)."),
+    description=("Cari kota di Indonesia, lihat bahasa daerahnya, lalu frasa per kategori "
+                 "(istilah daerah, pelafalan, arti). `ui` = bahasa arti id/en, `pron` = gaya pelafalan id/en.\n\n"
+                 "Auth: `X-API-Key` (kelompok lain) atau `Authorization: Bearer <JWT>` (pengguna aplikasi)."),
     lifespan=lifespan,
 )
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["GET", "PUT"], allow_headers=["*"])
 
 
 def run(fn, *args, **kwargs):
-    """Buka koneksi, jalankan fungsi repository, ubah NotFound -> HTTP 404."""
+    """Jalankan fungsi repository; NotFound jadi HTTP 404."""
     with db.get_db() as con:
         try:
             return fn(con, *args, **kwargs)

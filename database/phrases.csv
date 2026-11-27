@@ -1,31 +1,31 @@
-key,category,id_ID,en_US,jv_ID,su_ID,ban_ID,osi_ID
-greet_hello,greeting,Halo,Hello,Halo,Halo,Om Swastiastu,Halo
-greet_morning,greeting,Selamat pagi,Good morning,Sugeng enjing,Wilujeng énjing,Rahajeng semeng,Sugeng enjing
-greet_goodbye,greeting,Sampai jumpa,Goodbye,Kula pamit,Abdi pamit,Titiang mamit,Kula pamit
-intro_name,intro,Nama saya,My name is,Nami kula,Nami abdi,Parab titiang,Nami kula
-polite_sorry,polite,Maaf,I'm sorry,Nyuwun ngapunten,Hapunten,Titiang nunas ampura,Nyuwun ngapunten
-polite_excuse,polite,Permisi,Excuse me,Nuwun sewu,Punten,Nunas ampura,Nuwun sewu
-polite_thanks,polite,Terima kasih,Thank you,Matur nuwun,Hatur nuhun,Suksma,Matur nuwun
-polite_welcome,polite,Sama-sama,You're welcome,Sami-sami,Sami-sami,Suksma mewali,Sami-sami
-polite_please,polite,Tolong,Please,Monggo,Mangga,Durusang,Monggo
-basic_yes,basic,Ya,Yes,Inggih,Muhun,Inggih,Inggih
-basic_no,basic,Tidak,No,Mboten,Henteu,Ten,Mboten
-shop_how_much,shopping,Berapa harga ini?,How much is this?,Niki pinten regine?,Sabaraha hargana ieu?,Aji kuda niki?,Niki pinten regine?
-shop_buy_this,shopping,Saya mau beli ini,I want to buy this,Kula badhe tumbas niki,Abdi badé mésér ieu,Titiang jagi numbas niki,Kula badhe tumbas niki
-shop_too_expensive,shopping,Terlalu mahal,That's too expensive,Niki awis sanget,Ieu awis pisan,Niki mael pisan,Niki awis sanget
-shop_discount,shopping,Bisa kurang?,Can you give me a discount?,Saged kirang mboten?,Tiasa dikirangan hargana?,Dados kirangin?,Saged kirang mboten?
-shop_card,shopping,Bisa bayar pakai kartu?,Can I pay by card?,Saged mbayar kaliyan kartu?,Tiasa mayar nganggo kartu?,Dados mayah ngangge kartu?,Saged mbayar kaliyan kartu?
-help_toilet,help,Di mana toilet?,Where is the toilet?,Kamar kecil wonten pundi?,Toilét aya di mana?,Toilet wenten dija?,Kamar kecil wonten pundi?
-help_help_me,help,Bisa tolong saya?,Can you help me?,Saged mbiyantu kula?,Tiasa ngabantosan abdi?,Dados tulungin titiang?,Saged mbiyantu kula?
-help_dont_understand,help,Saya tidak mengerti,I don't understand,Kula mboten ngertos,Abdi teu ngartos,Titiang nenten mudeng,Kula mboten ngertos
-help_speak_english,help,Apakah Anda bisa berbahasa Inggris?,Do you speak English?,Panjenengan saged basa Inggris?,Anjeun tiasa basa Inggris?,Napi Ragane dados mabasa Inggris?,Panjenengan saged basa Inggris?
-num_1,number,Satu,One,Siji,Hiji,Besik,Siji
-num_2,number,Dua,Two,Loro,Dua,Kalih,Loro
-num_3,number,Tiga,Three,Telu,Tilu,Tiga,Telu
-num_4,number,Empat,Four,Papat,Opat,Papat,Papat
-num_5,number,Lima,Five,Lima,Lima,Lima,Lima
-num_6,number,Enam,Six,Enem,Genep,Nem,Enem
-num_7,number,Tujuh,Seven,Pitu,Tujuh,Pitu,Pitu
-num_8,number,Delapan,Eight,Wolu,Dalapan,Kutus,Wolu
-num_9,number,Sembilan,Nine,Sanga,Salapan,Sia,Sanga
-num_10,number,Sepuluh,Ten,Sepuluh,Sapuluh,Dasa,Sepuluh
+key,category,id_ID,en_US,jv_ID,su_ID,ban_ID,ace_ID,bbc_ID,min_ID,ms_ID,bew_ID,mad_ID,bug_ID,bjn_ID,xmm_ID,abs_ID,pmy_ID
+greet_hello,greeting,Halo,Hello,Halo,Halo,Om Swastiastu,Assalamu'alaikum,Horas,Assalamualaikum,Apa khabar,Ape kabar,Salamet,Tabe,Assalamualaikum,Halo,Halo,Halo
+greet_morning,greeting,Selamat pagi,Good morning,Sugeng enjing,Wilujeng énjing,Rahajeng semeng,Seulamat beungoh,"Horas, selamat pagi",Salamaik pagi,Selamat pagi,Selamet pagi,Salamet laggu,Salama' ele',Salamat baisukan,Selamat pagi,Selamat pagi,Selamat pagi
+greet_goodbye,greeting,Sampai jumpa,Goodbye,Kula pamit,Abdi pamit,Titiang mamit,Sampoe meurumpok lom,Horas ma di hamu,Sampai basuo baliak,Jumpe lagi,Ampe ketemu lagi,Sampè' atemmo polè,Sampai siruntu paimeng,Sampai batamu pulang,Sampe ketemu ulang,Sampe katamu lai,Sampe ketemu lagi
+intro_name,intro,Nama saya,My name is,Nami kula,Nami abdi,Parab titiang,Nan lon,Goarhu,Namo ambo,Name saye,Name aye,Tang nyama,Asengku,Ngaran ulun,Kita pe nama,Beta pung nama,Sa pu nama
+polite_sorry,polite,Maaf,I'm sorry,Nyuwun ngapunten,Hapunten,Titiang nunas ampura,Meu'ah,Santabi,Ambo mintak maaf,Maaf,Maapin aye,Sapora,Addampengekka',Ampun maaf,Maaf jo,Maaf e,Maaf
+polite_excuse,polite,Permisi,Excuse me,Nuwun sewu,Punten,Nunas ampura,Tabek,Marsantabi,Maaf,Tumpang lalu,Permisi,Permisè,Tabe',Tabik,Permisi,Permisi,Permisi
+polite_thanks,polite,Terima kasih,Thank you,Matur nuwun,Hatur nuhun,Suksma,Teurimong geunaseh,Mauliate,Tarimo kasih,Terime kasih,Makasih,Kalangkong,Terima kasi',Tarima kasih,Makase,Danke,Terima kasih
+polite_welcome,polite,Sama-sama,You're welcome,Sami-sami,Sami-sami,Suksma mewali,Saban-saban,Sarupa,Samo-samo,Same-same,Same-same,Padâ-padâ,Pada-pada,Sama-sama,Sama-sama,Sama-sama,Sama-sama
+polite_please,polite,Tolong,Please,Monggo,Mangga,Durusang,Neutulong,Tolong,Tolong,Tolong,Tulung,Tolong,Tulungi,Tulung,Tolong,Tolong,Tolong
+basic_yes,basic,Ya,Yes,Inggih,Muhun,Inggih,Nyo,Olo,Iyo,Ye,Iye,Engghi,Iye,Inggih,Iyo,Iyo,Iyo
+basic_no,basic,Tidak,No,Mboten,Henteu,Ten,Hana,Dang,Indak,Tak,Kagak,Enjâ',De',Kada,Nyanda,Seng,Tra
+shop_how_much,shopping,Berapa harga ini?,How much is this?,Niki pinten regine?,Sabaraha hargana ieu?,Aji kuda niki?,Padum yum nyoe?,Sadia argana on?,Bara harago iko?,Berape harge ni?,Berape harganye nih?,Saponapa arghâna?,Siaga ellinna iyé?,Barapa haraganya?,Brapa harga ini?,Barapa harga ini?,Brapa harga ni?
+shop_buy_this,shopping,Saya mau beli ini,I want to buy this,Kula badhe tumbas niki,Abdi badé mésér ieu,Titiang jagi numbas niki,Lon keuneuk bloe nyoe,Naeng manuhor on ahu,Ambo nio mambali iko,Saye nak beli ni,Aye mau beli ini,Kaulâ terro mellè rèya,Maeloka melli iyé,Ulun handak manukar nang ini,Kita mo beli ini,Beta mau bali ini,Sa mau beli ini
+shop_too_expensive,shopping,Terlalu mahal,That's too expensive,Niki awis sanget,Ieu awis pisan,Niki mael pisan,Mahai that,Mahal hian,Maha bana,Mahal sangat,Mahal amat,Larang ongghu,Masuli' senna,Larang banar,Mahal skali,Mahal skali,Mahal skali
+shop_discount,shopping,Bisa kurang?,Can you give me a discount?,Saged kirang mboten?,Tiasa dikirangan hargana?,Dados kirangin?,Jeut kureung?,Boi do hurang?,Bisa kurang?,Boleh kurang?,Bisa kurang kagak?,Bisa korang?,Wedding kurang?,Kawa kurang?,Bole kurang?,Bisa kurang ka seng?,Bisa kurang ka?
+shop_card,shopping,Bisa bayar pakai kartu?,Can I pay by card?,Saged mbayar kaliyan kartu?,Tiasa mayar nganggo kartu?,Dados mayah ngangge kartu?,Jeut bayeue ngon kartu?,Boi do manggarar pakai kartu?,Bisa bayia pakai kartu?,Boleh bayar pakai kad?,Bisa bayar pake kartu?,Bisa majâr ngangghuy kartu?,Wedding mabbayara pake kartu?,Kawa mambayar pakai kartu?,Bole bayar pake kartu?,Bisa bayar pake kartu ka?,Bisa bayar pake kartu ka?
+help_toilet,help,Di mana toilet?,Where is the toilet?,Kamar kecil wonten pundi?,Toilét aya di mana?,Toilet wenten dija?,Pat kamar ie?,Didia kamar mandi?,Di ma kamar mandi?,Di mane tandas?,WC di mane?,È dimma kamar mandi?,Kegai kamara' manditta?,Di mana jamban?,WC di mana?,WC di mana?,WC di mana?
+help_help_me,help,Bisa tolong saya?,Can you help me?,Saged mbiyantu kula?,Tiasa ngabantosan abdi?,Dados tulungin titiang?,Jeut neutulong lon?,Boi do ho mangurupi ahu?,Bisa tolong ambo?,Boleh tolong saye?,Bisa tulungin aye?,Bisa nolong kaulâ?,Wedding tulungi ka'?,Kawa tulungi ulun?,Bole tolong pa kita?,Bisa tolong beta ka?,Ko bisa bantu sa ka?
+help_dont_understand,help,Saya tidak mengerti,I don't understand,Kula mboten ngertos,Abdi teu ngartos,Titiang nenten mudeng,Lon hana meuphom,Ndang huantusi,Ambo indak mangarati,Saye tak paham,Aye kagak ngarti,Sèngko' ta' ngartè,De' upahangi,Ulun kada paham,Kita nyanda mangarti,Beta seng mangarti,Sa tra mengerti
+help_speak_english,help,Apakah Anda bisa berbahasa Inggris?,Do you speak English?,Panjenengan saged basa Inggris?,Anjeun tiasa basa Inggris?,Napi Ragane dados mabasa Inggris?,Droeneuh jeut bahasa Inggreh?,Boi do ho marhata Inggris?,Bisa babahaso Inggirih?,Awak boleh cakap Inggris?,Situ bisa ngomong Inggris?,Bâ'na abhâsa Inggris?,Wedding ga mabbicara basa Inggris?,Pian kawa bebahasa Inggris?,Ngana bisa bahasa Inggris?,Ale bisa bahasa Inggris ka?,Ko bisa bahasa Inggris ka?
+num_1,number,Satu,One,Siji,Hiji,Besik,Sa,Sada,Ciek,Satu,Satu,Sèttong,Seddi,Asa,Satu,Satu,Satu
+num_2,number,Dua,Two,Loro,Dua,Kalih,Dua,Dua,Duo,Due,Due,Duwâ',Dua,Dua,Dua,Dua,Dua
+num_3,number,Tiga,Three,Telu,Tilu,Tiga,Lhee,Tolu,Tigo,Tige,Tige,Tello',Tellu,Talu,Tiga,Tiga,Tiga
+num_4,number,Empat,Four,Papat,Opat,Papat,Peuet,Opat,Ampek,Empat,Empat,Empa',Eppa,Ampat,Ampa,Ampa,Empat
+num_5,number,Lima,Five,Lima,Lima,Lima,Limong,Lima,Limo,Lime,Lime,Lèma',Lima,Lima,Lima,Lima,Lima
+num_6,number,Enam,Six,Enem,Genep,Nem,Nam,Onom,Anam,Enam,Enem,Ennem,Enneng,Anam,Anam,Anam,Enam
+num_7,number,Tujuh,Seven,Pitu,Tujuh,Pitu,Tujoh,Pitu,Tujuah,Tujuh,Tujuh,Pettong,Pitu,Pitu,Tujuh,Tujuh,Tujuh
+num_8,number,Delapan,Eight,Wolu,Dalapan,Kutus,Lapan,Walu,Salapan,Lapan,Delapan,Ballu',Aruwa,Walu,Delapan,Dalapang,Delapan
+num_9,number,Sembilan,Nine,Sanga,Salapan,Sia,Sikureueng,Sia,Sambilan,Sembilan,Sembilan,Sanga',Asera,Sanga,Sambilan,Sambilang,Sembilan
+num_10,number,Sepuluh,Ten,Sepuluh,Sapuluh,Dasa,Siploh,Sappulu,Sapuluah,Sepuluh,Sepuluh,Sapolo,Seppulo,Sapuluh,Sapulu,Sapulu,Sepuluh

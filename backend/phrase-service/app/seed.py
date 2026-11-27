@@ -1,10 +1,8 @@
-"""Isi database SQLite dari folder database/ (CSV = sumber kebenaran).
+"""Isi SQLite dari CSV. Diisi ulang otomatis kalau isi CSV berubah.
 
-Saat service start: jika isi CSV berubah (hash), seluruh data diisi ulang otomatis.
-Manual: docker compose exec phrase-service python -m app.seed --reset
+Paksa isi ulang: docker compose exec phrase-service python -m app.seed --reset
 """
 import argparse
-from pathlib import Path
 
 from . import config, dataset, db
 from .textutil import normalize
@@ -13,60 +11,63 @@ TABLES = ("pronunciations", "translations", "phrases", "categories", "city_langu
           "province_languages", "provinces", "emergency_numbers", "languages")
 
 
-def seed(con, ds: dataset.Dataset) -> dict:
+def seed(con, ds: dataset.Dataset):
     for t in TABLES:
         con.execute(f"DELETE FROM {t}")
-    for r in ds.languages:
+
+    for l in ds.languages:
         con.execute("INSERT INTO languages VALUES (?,?,?,?,?,?)",
-                    (r["code"], r["name_id"], r["name_en"], r["native_name"], r["closest_code"],
-                     1 if r["status"] == "approximate" else 0))
-    for r in ds.categories:
+                    (l["code"], l["name_id"], l["name_en"], l["native_name"], l["closest_code"],
+                     int(l["closest_code"] != l["code"])))
+    for c in ds.categories:
         con.execute("INSERT INTO categories VALUES (?,?,?,?)",
-                    (r["code"], r["name_en"], r["name_id"], int(r["sort_order"])))
-    for r in ds.provinces:
-        con.execute("INSERT INTO provinces VALUES (?,?,?)", (r["code"], r["name_id"], r["name_en"]))
-        for i, l in enumerate(r["languages"]):
-            con.execute("INSERT OR IGNORE INTO province_languages VALUES (?,?,?)", (r["code"], l, i))
-    for r in ds.cities:
+                    (c["code"], c["name_en"], c["name_id"], int(c["sort_order"])))
+    for p in ds.provinces:
+        con.execute("INSERT INTO provinces VALUES (?,?,?)", (p["code"], p["name_id"], p["name_en"]))
+        for i, l in enumerate(p["languages"]):
+            con.execute("INSERT INTO province_languages VALUES (?,?,?)", (p["code"], l, i))
+    for c in ds.cities:
         con.execute("INSERT INTO cities VALUES (?,?,?,?,?)",
-                    (r["code"], r["name"], normalize(r["name"]), r["type"], r["province_code"]))
-        for i, l in enumerate(r["languages"]):
-            con.execute("INSERT OR IGNORE INTO city_languages VALUES (?,?,?)", (r["code"], l, i))
+                    (c["code"], c["name"], normalize(c["name"]), c["type"], c["province_code"]))
+        for i, l in enumerate(c["languages"]):
+            con.execute("INSERT INTO city_languages VALUES (?,?,?)", (c["code"], l, i))
+
     for i, p in enumerate(ds.phrases):
-        con.execute("INSERT INTO phrases VALUES (?,?,?,?,?)",
-                    (p["key"], p["category"], p["meaning_id"], p["meaning_en"], i))
-    for (key, lang), text in ds.translations.items():
-        con.execute("INSERT INTO translations VALUES (?,?,?)", (key, lang, text))
-    for (key, lang, style), guide in ds.pronunciations.items():
-        con.execute("INSERT INTO pronunciations VALUES (?,?,?,?)", (key, lang, style, guide))
-    for r in ds.emergency:
+        key = p["key"]
+        con.execute("INSERT INTO phrases VALUES (?,?,?,?,?)", (key, p["category"], p["id_ID"], p["en_US"], i))
+        for l in ds.languages:
+            src = l["closest_code"]          # bahasa perkiraan memakai isi bahasa terdekat
+            con.execute("INSERT INTO translations VALUES (?,?,?)", (key, l["code"], p[src]))
+            con.execute("INSERT INTO pronunciations VALUES (?,?,?,?)", (key, l["code"], "en", ds.pron_en[key][src]))
+            con.execute("INSERT INTO pronunciations VALUES (?,?,?,?)", (key, l["code"], "id", ds.pron_id[key][src]))
+
+    for e in ds.emergency:
         con.execute("INSERT INTO emergency_numbers VALUES (?,?,?,?)",
-                    (r["service"], r["name_id"], r["name_en"], r["number"]))
+                    (e["service"], e["name_id"], e["name_en"], e["number"]))
     con.commit()
-    return {"provinces": len(ds.provinces), "cities": len(ds.cities), "languages": len(ds.languages),
-            "phrases": len(ds.phrases)}
+    return {"provinces": len(ds.provinces), "cities": len(ds.cities),
+            "languages": len(ds.languages), "phrases": len(ds.phrases)}
 
 
-def ensure_seeded(con, database_dir: Path = None) -> None:
-    database_dir = database_dir or config.DATABASE_DIR
+def ensure_seeded(con, folder=None):
+    folder = folder or config.DATABASE_DIR
     db.init_schema(con)
-    if not (database_dir / "phrases.csv").is_file():
-        raise RuntimeError(f"Folder database tidak ditemukan di {database_dir} (mount ../database ke /database)")
-    h = dataset.source_hash(database_dir)
+    if not (folder / "phrases.csv").is_file():
+        raise RuntimeError(f"Folder database tidak ditemukan di {folder}")
+    h = dataset.source_hash(folder)
     row = con.execute("SELECT value FROM meta WHERE key='source_hash'").fetchone()
-    if row is None or row["value"] != h:
-        ds = dataset.load(database_dir)          # raise DatasetError (daftar lengkap masalah) bila CSV tidak valid
-        info = seed(con, ds)
-        con.execute("INSERT OR REPLACE INTO meta VALUES ('source_hash', ?)", (h,))
-        con.commit()
-        print(f"[seed] data diisi ulang dari database/: {info}")
-    else:
-        print("[seed] data sudah sesuai database/ (tidak diisi ulang)")
+    if row and row["value"] == h:
+        print("[seed] data sudah sesuai CSV")
+        return
+    info = seed(con, dataset.load(folder))   # CSV tidak valid -> error, data lama tetap utuh
+    con.execute("INSERT OR REPLACE INTO meta VALUES ('source_hash', ?)", (h,))
+    con.commit()
+    print(f"[seed] data diisi ulang dari CSV: {info}")
 
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("--reset", action="store_true", help="paksa isi ulang walau CSV tak berubah")
+    ap.add_argument("--reset", action="store_true", help="paksa isi ulang walau CSV tidak berubah")
     args = ap.parse_args()
     c = db.connect()
     db.init_schema(c)
