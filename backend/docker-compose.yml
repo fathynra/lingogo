@@ -34,10 +34,10 @@ services:
     environment:
       JWT_SECRET: ${JWT_SECRET:?isi JWT_SECRET di .env}
       JWT_EXPIRE_MINUTES: ${JWT_EXPIRE_MINUTES:-10080}
-      ADMIN_EMAIL: ${ADMIN_EMAIL:-}
-      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-}
-      DEMO_EMAIL: ${DEMO_EMAIL:-}
-      DEMO_PASSWORD: ${DEMO_PASSWORD:-}
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-admin@lingogo.stei.site}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-admin123}
+      DEMO_EMAIL: ${DEMO_EMAIL:-demo@lingogo.stei.site}
+      DEMO_PASSWORD: ${DEMO_PASSWORD:-demo123}
       DB_PATH: /data/users.db
     volumes:
       - user_data:/data
